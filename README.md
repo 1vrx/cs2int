@@ -1,10 +1,15 @@
 __**CS2 Internal Cheat**__
 
-Aimbot  ESP (tracers & box)
+
+*HAS*  
+
+Aimbot  
+Tracers  
+BoneESP
 
        
-todo:  
-skeleton esp  
+*todo*:  
+
 add chams  
 aimbot settings   
 rcs  
@@ -12,5 +17,7 @@ menu
 
 
 
+bone esp  
 
-    kierohook
+![image](https://github.com/user-attachments/assets/bb45bd02-2275-48e4-af6c-a5d11357e241)
+
