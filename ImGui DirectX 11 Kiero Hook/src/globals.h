@@ -1,0 +1,33 @@
+#pragma once
+
+#include "includes.h"
+#include "math/mymath.h"
+#include "offsets.h"
+
+namespace globals
+{
+	const uintptr_t modBase = (uintptr_t)GetModuleHandleW(L"client.dll");
+	//const uintptr_t* LocalPlayer = (uintptr_t*)(modBase + o::client::dwLocalPlayer);	//currently causing LNK2005 issue... 
+	const Vec3 dwViewAngles = *(Vec3*)(modBase + o::client::dwViewAngles);
+}
+
+
+
+class Entity
+{
+
+public:
+
+	int health{};
+	int shield{};
+
+	Vec3 pos{};
+	Vec3 headpos{};	//x = pitch. y = yaw. z = roll
+	Vec3 angle{};	//x = pitch. y = yaw. z = roll	
+
+	int team{};	//1 = SPEC. 2 = T. 3 = CT
+
+
+};
+
+
