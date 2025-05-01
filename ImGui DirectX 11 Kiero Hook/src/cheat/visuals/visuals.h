@@ -7,5 +7,5 @@ namespace visual
 {
 	void PlayerESP();
 	void BoneESP();
-	
+	void Tracers();
 }

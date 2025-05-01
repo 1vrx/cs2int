@@ -1,6 +1,14 @@
 #include "visuals.h"
 
 
+namespace device
+{
+	extern float resX = GetSystemMetrics(SM_CXSCREEN);
+	extern float resY = GetSystemMetrics(SM_CYSCREEN);
+
+	const ImVec2 midPoint = { (resX / 2), (resY / 2) };
+}
+
 namespace visual
 {
 	float(*ViewMatrix)[4][4] = (float(*)[4][4])(globals::modBase + o::client::dwViewMatrix);
@@ -32,5 +40,28 @@ namespace visual
 	{
 		
 		
+	}
+
+	void Tracers()
+	{
+		for (int i = 0; i <= entlist::entcount; i++)
+		{
+
+			if (!entlist::players[i].headpos.W2S(screenhead, ViewMatrix))
+				continue;
+
+			std::cout << "\n[DEBUG] feetpos (screen) = x/y " << screenfeet.x << " / " << screenfeet.y;
+			
+			Vec2 points;
+			points.x = device::resX / 2;
+			points.y = device::resY / 2;
+
+		
+			ImGui::GetBackgroundDrawList()->AddLine(device::midPoint, { screenhead.x, screenhead.y }, ImColor(255, 255, 255));
+			std::cout << "Tracers\n";
+
+			
+
+		}
 	}
 }

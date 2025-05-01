@@ -22,11 +22,12 @@ namespace toggle
 {
 	bool aimbot = false;
 	bool esp = false;
+	bool tracers = false;
 }
 
 void cheat()
 {
-	system("cls");
+	//system("cls");
 	entlist::Init();
 
 	if (GetAsyncKeyState(VK_F2) & 1)
@@ -37,15 +38,12 @@ void cheat()
 	{
 		toggle::esp = !toggle::esp;
 	}
-	if (toggle::aimbot)
+	if (GetAsyncKeyState(VK_F5) & 1)
 	{
-		if (GetAsyncKeyState(VK_LMENU))
-			aim::Aimbot();
+		toggle::tracers = !toggle::tracers;
 	}
-	if (toggle::esp)
-	{
-		visual::PlayerESP();
-	}
+	
+	
 	std::this_thread::sleep_for(std::chrono::milliseconds(1));
 	
 }
@@ -93,15 +91,26 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 	}
 	std::cout << "\nwe made it here";
 
-	
+	cheat();
 
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 
-	ImGui::Begin("ImGui Window");
-	cheat();
-	ImGui::End();
+	if (toggle::aimbot)
+	{
+		if (GetAsyncKeyState(VK_LMENU))
+			aim::Aimbot();
+	}
+	if (toggle::esp)
+	{
+		visual::PlayerESP();
+	}
+	if (toggle::tracers)
+	{
+		visual::Tracers();
+	}
+	
 
 	ImGui::Render();
 
