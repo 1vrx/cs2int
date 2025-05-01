@@ -13,7 +13,7 @@ namespace entlist
 	void Init()
 	{
 
-		std::cout << "\nCalled INIT";
+		//std::cout << "\nCalled INIT";
 		for (int i = 0; i < 64; i++) //starts from local player (0)
 		{
 
@@ -23,7 +23,7 @@ namespace entlist
 			
 			if (!entity)
 				break;
-
+			
 			uintptr_t gamescene = *(uintptr_t*)(entity + 0x328);
 			uintptr_t bonearray = *(uintptr_t*)(gamescene + 0x170 + 0x80);
 

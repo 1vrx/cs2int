@@ -15,6 +15,19 @@ namespace visual
 	Vec2 screenfeet{};
 	Vec2 screenhead{};
 
+	Vec2 v2head{};
+	Vec2 v2spine2{};
+	Vec2 v2pelvis{};
+	Vec2 v2_L_elbow{};
+	Vec2 v2_L_hand{};
+	Vec2 v2_R_elbow{};
+	Vec2 v2_R_hand{};
+	Vec2 v2_L_thigh{};
+	Vec2 v2_L_foot{};
+	Vec2 v2_R_thigh{};
+	Vec2 v2_R_foot{};
+
+
 	void PlayerESP()
 	{
 		for (int i = 0; i <= entlist::entcount; i++)
@@ -38,8 +51,77 @@ namespace visual
 	
 	void BoneESP() 
 	{
-		
-		
+		for (int i = 0; i <= entlist::entcount; i++)
+		{
+			//check if localplayer - entlist::players[i].team can be done for a team check 
+			if (entlist::players[i].pos.x == entlist::players[0].pos.x)
+				continue;
+
+			//step through to bone array
+			uintptr_t entity	= *(uintptr_t*)(globals::modBase + o::client::dwEntityList + (0x10 * i));
+			if (!entity)
+				break;
+			uintptr_t gamescene = *(uintptr_t*)(entity + 0x328);
+			uintptr_t bonearray = *(uintptr_t*)(gamescene + 0x170 + 0x80);
+			
+			//initialize 3d co-ordinates of the bones
+			Vec3 v3head			= *(Vec3*)(bonearray + 6 * 32);
+			Vec3 v3spine2		= *(Vec3*)(bonearray + 3 * 32);
+			Vec3 v3pelvis		= *(Vec3*)(bonearray + 0 * 32);
+			Vec3 v3_L_elbow		= *(Vec3*)(bonearray + 8 * 32);
+			Vec3 v3_L_hand		= *(Vec3*)(bonearray + 10 * 32);
+			Vec3 v3_R_elbow		= *(Vec3*)(bonearray + 13 * 32);
+			Vec3 v3_R_hand		= *(Vec3*)(bonearray + 15 * 32);
+			Vec3 v3_L_thigh		= *(Vec3*)(bonearray + 22 * 32);
+			Vec3 v3_L_foot		= *(Vec3*)(bonearray + 24 * 32);
+			Vec3 v3_R_thigh		= *(Vec3*)(bonearray + 25 * 32);
+			Vec3 v3_R_foot		= *(Vec3*)(bonearray + 27 * 32);
+			
+			//check they are in view :
+			if (
+				!v3head.W2S(v2head, ViewMatrix)			&&
+				!v3spine2.W2S(v2spine2, ViewMatrix)		&&
+				!v3pelvis.W2S(v2pelvis, ViewMatrix)		&&
+				!v3_L_elbow.W2S(v2_L_elbow, ViewMatrix) &&
+				!v3_L_hand.W2S(v2_L_hand, ViewMatrix)	&&
+				!v3_R_elbow.W2S(v2_R_elbow, ViewMatrix) &&
+				!v3_R_hand.W2S(v2_R_hand, ViewMatrix)	&&
+				!v3_L_thigh.W2S(v2_L_thigh, ViewMatrix) &&
+				!v3_L_foot.W2S(v2_L_foot, ViewMatrix)	&&
+				!v3_R_thigh.W2S(v2_R_thigh, ViewMatrix) &&
+				!v3_R_foot.W2S(v2_R_foot, ViewMatrix)
+				)
+				continue;
+
+			//need to play around with this more, as the previous lines should do this for me but it wasnt running each W2S
+			v3head.W2S(v2head, ViewMatrix);
+			v3spine2.W2S(v2spine2, ViewMatrix);
+			v3pelvis.W2S(v2pelvis, ViewMatrix);
+			v3_L_elbow.W2S(v2_L_elbow, ViewMatrix);
+			v3_L_hand.W2S(v2_L_hand, ViewMatrix);
+			v3_R_elbow.W2S(v2_R_elbow, ViewMatrix);
+			v3_R_hand.W2S(v2_R_hand, ViewMatrix);
+			v3_L_thigh.W2S(v2_L_thigh, ViewMatrix);
+			v3_L_foot.W2S(v2_L_foot, ViewMatrix);
+			v3_R_thigh.W2S(v2_R_thigh, ViewMatrix);
+			v3_R_foot.W2S(v2_R_foot, ViewMatrix);
+			
+			//draw the lines
+			ImGui::GetBackgroundDrawList()->AddLine({v2head.x, v2head.y}, {v2spine2.x, v2spine2.y}, ImColor(255, 255, 255));	//head to spine [maybe i should do neck]
+			ImGui::GetBackgroundDrawList()->AddLine({ v2spine2.x, v2spine2.y }, { v2pelvis.x, v2pelvis.y }, ImColor(255, 255, 255));	//spine to pelvis
+			ImGui::GetBackgroundDrawList()->AddLine({ v2spine2.x, v2spine2.y }, { v2_L_elbow.x, v2_L_elbow.y }, ImColor(255, 255, 255));	//spine to left_elbow
+			ImGui::GetBackgroundDrawList()->AddLine({ v2spine2.x, v2spine2.y }, { v2_R_elbow.x, v2_R_elbow.y }, ImColor(255, 255, 255));	//spine to right_elbow
+			ImGui::GetBackgroundDrawList()->AddLine({ v2_L_elbow.x, v2_L_elbow.y }, { v2_L_hand.x, v2_L_hand.y }, ImColor(255, 255, 255));	//left elbow to left hand
+			ImGui::GetBackgroundDrawList()->AddLine({ v2_R_elbow.x, v2_R_elbow.y }, { v2_R_hand.x, v2_R_hand.y }, ImColor(255, 255, 255));	//right elbow to right hand
+			ImGui::GetBackgroundDrawList()->AddLine({ v2pelvis.x, v2pelvis.y }, { v2_L_thigh.x, v2_L_thigh.y }, ImColor(255, 255, 255));	//pelvis to left_thigh
+			ImGui::GetBackgroundDrawList()->AddLine({ v2pelvis.x, v2pelvis.y }, { v2_R_thigh.x, v2_R_thigh.y }, ImColor(255, 255, 255));	//pelvis to right_thigh
+			ImGui::GetBackgroundDrawList()->AddLine({ v2_L_thigh.x, v2_L_thigh.y }, { v2_L_foot.x, v2_L_foot.y }, ImColor(255, 255, 255));	//left_thigh to left_foot
+			ImGui::GetBackgroundDrawList()->AddLine({ v2_R_thigh.x, v2_R_thigh.y }, { v2_R_foot.x, v2_R_foot.y }, ImColor(255, 255, 255));	//right_thigh to right_foot
+			
+
+
+
+		}
 	}
 
 	void Tracers()
@@ -50,15 +132,10 @@ namespace visual
 			if (!entlist::players[i].headpos.W2S(screenhead, ViewMatrix))
 				continue;
 
-			std::cout << "\n[DEBUG] feetpos (screen) = x/y " << screenfeet.x << " / " << screenfeet.y;
+		
 			
-			Vec2 points;
-			points.x = device::resX / 2;
-			points.y = device::resY / 2;
-
 		
 			ImGui::GetBackgroundDrawList()->AddLine(device::midPoint, { screenhead.x, screenhead.y }, ImColor(255, 255, 255));
-			std::cout << "Tracers\n";
 
 			
 

@@ -23,6 +23,7 @@ namespace toggle
 	bool aimbot = false;
 	bool esp = false;
 	bool tracers = false;
+	bool skeleton = false;
 }
 
 void cheat()
@@ -41,6 +42,10 @@ void cheat()
 	if (GetAsyncKeyState(VK_F5) & 1)
 	{
 		toggle::tracers = !toggle::tracers;
+	}
+	if (GetAsyncKeyState(VK_F6) & 1)
+	{
+		toggle::skeleton = !toggle::skeleton;
 	}
 	
 	
@@ -89,7 +94,7 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 		else
 			return oPresent(pSwapChain, SyncInterval, Flags);
 	}
-	std::cout << "\nwe made it here";
+	
 
 	cheat();
 
@@ -109,6 +114,10 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 	if (toggle::tracers)
 	{
 		visual::Tracers();
+	}
+	if (toggle::skeleton)
+	{
+		visual::BoneESP();
 	}
 	
 

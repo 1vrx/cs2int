@@ -61,7 +61,7 @@ const bool Vec3::W2S(Vec2& out, float(*ViewMatrix)[4][4])
 	const float midX = screenWidth / 2;
 	const float midY = screenHeight / 2;
 
-	std::cout << "\n\nScreen Width / Height: " << screenWidth << " / " << screenHeight;	//returning 1920 x 1080
+	//std::cout << "\n\nScreen Width / Height: " << screenWidth << " / " << screenHeight;	//returning 1920 x 1080
 
 	out.x = midX + (((*ViewMatrix)[0][0] * x + (*ViewMatrix)[0][1] * y + (*ViewMatrix)[0][2] * z + (*ViewMatrix)[0][3]) / w * midX);
 	out.y = midY - (((*ViewMatrix)[1][0] * x + (*ViewMatrix)[1][1] * y + (*ViewMatrix)[1][2] * z + (*ViewMatrix)[1][3]) / w * midY);
