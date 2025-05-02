@@ -56,6 +56,8 @@ namespace visual
 			//check if localplayer - entlist::players[i].team can be done for a team check 
 			if (entlist::players[i].pos.x == entlist::players[0].pos.x)
 				continue;
+			if (entlist::players[i].health < 0)
+				continue;
 
 			//step through to bone array
 			uintptr_t entity	= *(uintptr_t*)(globals::modBase + o::client::dwEntityList + (0x10 * i));

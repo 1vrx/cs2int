@@ -1,6 +1,7 @@
 #include "includes.h"
 #include <cstdio>
 #include <thread>
+#include <string>
 
 #include "cheat/entlist.h"
 #include "globals.h"
@@ -18,19 +19,19 @@ ID3D11Device* pDevice = NULL;
 ID3D11DeviceContext* pContext = NULL;
 ID3D11RenderTargetView* mainRenderTargetView;
 
-namespace toggle
-{
-	bool aimbot = false;
-	bool esp = false;
-	bool tracers = false;
-	bool skeleton = false;
-}
+
 
 void cheat()
 {
 	//system("cls");
-	entlist::Init();
-
+	if (GetAsyncKeyState(VK_INSERT) & 1)
+	{
+		toggle::menu = !toggle::menu;
+	}
+	if (GetAsyncKeyState(VK_F1) & 1)
+	{
+		toggle::enabled = !toggle::enabled;
+	}
 	if (GetAsyncKeyState(VK_F2) & 1)
 	{
 		toggle::aimbot = !toggle::aimbot;
@@ -97,14 +98,31 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 	
 
 	cheat();
-
+	
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 
+	if (toggle::menu)
+	{
+		ImGui::Begin("menu");
+
+		ImGui::Checkbox("aimbot", &toggle::aimbot);
+		ImGui::NewLine();
+		ImGui::Checkbox("boneESP", &toggle::skeleton);
+		ImGui::NewLine();
+		ImGui::Checkbox("tracers", &toggle::tracers);
+		ImGui::End();
+	}
+	
+
+	if (toggle::enabled)
+	{
+		entlist::Init();
+	}
 	if (toggle::aimbot)
 	{
-		if (GetAsyncKeyState(VK_LMENU))
+		if (GetAsyncKeyState(VK_RBUTTON))
 			aim::Aimbot();
 	}
 	if (toggle::esp)
@@ -119,6 +137,12 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 	{
 		visual::BoneESP();
 	}
+
+	
+
+	ImGui::GetBackgroundDrawList()->AddText({ 29, 21 }, ImColor(0, 0, 0), "CS2 Internal");
+	ImGui::GetBackgroundDrawList()->AddText({ 30, 20 }, ImColor(255, 255, 255), "CS2 Internal");
+	
 	
 
 	ImGui::Render();
@@ -130,6 +154,7 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 
 DWORD WINAPI MainThread(LPVOID lpReserved)
 {
+	
 	AllocConsole();
 	FILE* f;
 	freopen_s(&f, "CONOUT$", "w", stdout);

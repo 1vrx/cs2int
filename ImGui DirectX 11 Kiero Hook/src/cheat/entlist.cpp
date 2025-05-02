@@ -18,6 +18,7 @@ namespace entlist
 		{
 
 			uintptr_t entity = *(uintptr_t*)(globals::modBase + o::client::dwEntityList + (0x10 * i));
+			entlist::players[i].C_CSPlayerPawn = *(uintptr_t*)(globals::modBase + o::client::dwEntityList + (0x10 * i));
 
 
 			

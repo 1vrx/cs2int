@@ -1,5 +1,6 @@
 #include "mymath.h"
 
+
 template <typename T>
 T RadToDegree(T Radians)
 {

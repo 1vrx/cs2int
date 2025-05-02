@@ -82,6 +82,8 @@ namespace aim
 
 		//for now the target will be the nearest entity.
 		Entity target = GetNearest();
+		if (target.health < 0)
+			return;
 
 		//calculating the angle (in degrees) between me and the opponent
 		raw_angles = calcAngle(entlist::players[0].headpos, target.headpos);
@@ -106,6 +108,9 @@ namespace aim
 
 		//can play around with this to make silent aim 
 		old_angles = *(Vec3*)(globals::modBase + o::client::dwViewAngles);		//read old angles and store them temp
+
+		
+
 
 		*(Vec3*)(globals::modBase + o::client::dwViewAngles) = angle_to_aim;
 

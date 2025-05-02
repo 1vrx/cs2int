@@ -11,12 +11,22 @@ namespace globals
 	const Vec3 dwViewAngles = *(Vec3*)(modBase + o::client::dwViewAngles);
 }
 
-
+namespace toggle
+{
+	extern bool enabled;
+	extern bool menu;
+	extern bool aimbot;
+	extern bool esp;
+	extern bool tracers;
+	extern bool skeleton;
+}
 
 class Entity
 {
 
 public:
+
+	uintptr_t C_CSPlayerPawn{};
 
 	int health{};
 	int shield{};
