@@ -8,4 +8,6 @@ namespace visual
 	void PlayerESP();
 	void BoneESP();
 	void Tracers();
+	void HealthESP();
+	void Glow(bool val);
 }

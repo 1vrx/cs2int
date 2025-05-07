@@ -130,8 +130,11 @@ namespace visual
 	{
 		for (int i = 0; i <= entlist::entcount; i++)
 		{
-
+			//if in view, render
 			if (!entlist::players[i].headpos.W2S(screenhead, ViewMatrix))
+				continue;
+			//if not local player, render
+			if (entlist::players[i].pos.x == entlist::players[0].pos.x)
 				continue;
 
 		
@@ -142,5 +145,47 @@ namespace visual
 			
 
 		}
+	}
+
+	void HealthESP()
+	{
+		for (int i = 0; i <= entlist::entcount; i++)
+		{
+			if (!entlist::players[i].headpos.W2S(screenhead, ViewMatrix))
+				continue;
+			//if not local player, render
+			if (entlist::players[i].pos.x == entlist::players[0].pos.x)
+				continue;
+
+
+
+
+
+			entlist::players[i].headpos.W2S(screenhead, ViewMatrix);
+			entlist::players[i].pos.W2S(screenfeet, ViewMatrix);
+
+
+			//ImGui::GetBackgroundDrawList()->AddRectFilled({/*min X and Y VAL*/ });
+
+		}
+	}
+	void Glow(bool val)
+	{
+
+		if (val == 1)
+		{
+			for (int i = 1; i <= entlist::entcount; i++)
+			{
+				entlist::pawn[i].Glow(100000.f);
+			}
+		}
+		if (val == 0)
+		{
+			for (int i = 1; i <= entlist::entcount; i++)
+			{
+				entlist::pawn[i].Glow(0.f);
+			}
+		}
+		
 	}
 }

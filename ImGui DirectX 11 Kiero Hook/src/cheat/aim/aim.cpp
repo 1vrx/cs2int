@@ -2,6 +2,11 @@
 
 namespace aim
 {
+
+	float(*ViewMatrix)[4][4] = (float(*)[4][4])(globals::modBase + o::client::dwViewMatrix);
+	
+
+
 	Entity GetNearest()
 	{
 		//temp val to compare dist;
@@ -101,29 +106,48 @@ namespace aim
 		std::cout << "\nshould be aiming @: " << angle_to_aim.x << " " << angle_to_aim.y;
 
 		//commenting this out because im using a hold to aim currently so not needed.
-		/*
-		if (calcDist(entlist::players[0].headpos, target.pos) > 2000)
-			return;
-		*/
-
-		//can play around with this to make silent aim 
-		old_angles = *(Vec3*)(globals::modBase + o::client::dwViewAngles);		//read old angles and store them temp
-
 		
+		if (calcDist(entlist::players[0].headpos, target.pos) > cheatsetting::aimDist)
+			return;
+		
+		
+		old_angles = *(Vec3*)(globals::modBase + o::client::dwViewAngles);
 
+		//auto delta = (angle_to_aim - old_angles);
 
-		*(Vec3*)(globals::modBase + o::client::dwViewAngles) = angle_to_aim;
+		//auto final = (angle_to_aim + delta);
 
-		//shoot function here to make ragebot 
+		//*(Vec3*)(globals::modBase + o::client::dwViewAngles) = angle_to_aim;
+		*(Vec3*)(globals::modBase + o::client::dwViewAngles) = angle_to_aim / cheatsetting::aimSmooth;
 
-		//*(Vec3*)(*globals::LocalPlayer + o::C_CSPlayerPawn::unknown_vCam) = old_angles;
-		//*(Vec3*)(*globals::LocalPlayer + o::C_CSPlayerPawn::unknown_vCam2) = old_angles;
+	
 
 
 		std::cout << "\naimbot - end";
 
 
 	}
+
+	void mouse_aimbot()
+	{
+		Entity target = GetNearest();
+		if (target.health < 0)
+			return;
+
+		Vec2 v2_screen;
+
+		target.headpos.W2S(v2_screen, ViewMatrix);
+
+		if (calcDist(entlist::players[0].headpos, target.pos) > cheatsetting::aimDist)
+			return;
+		
+		mouse_event(MOUSEEVENTF_MOVE, v2_screen.x, v2_screen.y, 0, 0);
+
+		
+	}
+	
+
+
 }
 
 

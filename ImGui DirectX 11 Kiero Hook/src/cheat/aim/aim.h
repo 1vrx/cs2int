@@ -4,16 +4,22 @@
 #include "../../globals.h"
 
 
+
+
 namespace aim
 {
 	Entity GetNearest();
 
 	Vec3 normalize(Vec3 angles);
 
-
+	
 	
 
 	void Aimbot();
+
+	
+	void mouse_aimbot();
+	
 }
 
 

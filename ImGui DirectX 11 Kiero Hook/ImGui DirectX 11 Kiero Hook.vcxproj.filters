@@ -75,6 +75,12 @@
     <ClCompile Include="src\cheat\visuals\visuals.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\cheat\visuals\world\aspectfov.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cheat\sdk\CEntity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ext\kiero\minhook\dll_resources\MinHook.rc">
@@ -152,6 +158,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\cheat\visuals\visuals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\font.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\patternscan.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\cheat\visuals\world\aspectfov.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\cheat\sdk\CEntity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

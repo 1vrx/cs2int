@@ -9,4 +9,19 @@ namespace toggle
 	bool esp = false;
 	bool tracers = false;
 	bool skeleton = false;
+	bool healthESP = false;
+	bool maimbot = false;
+	bool glow = false;
+
+	bool newentlist = false;
+	
+	
+}
+
+namespace cheatsetting
+{
+	float smoothing = 15.0f;
+	float renderDist = 1000.f;
+	float aimDist = 1000.f;
+	float aimSmooth = 4.f;
 }

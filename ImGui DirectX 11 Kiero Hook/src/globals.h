@@ -19,6 +19,22 @@ namespace toggle
 	extern bool esp;
 	extern bool tracers;
 	extern bool skeleton;
+	extern bool healthESP;
+	extern bool maimbot;
+	extern bool glow;
+
+	extern bool newentlist;
+	
+
+
+}
+
+namespace cheatsetting
+{
+	extern float smoothing;
+	extern float renderDist;
+	extern float aimDist;
+	extern float aimSmooth;
 }
 
 class Entity
@@ -26,6 +42,7 @@ class Entity
 
 public:
 
+	uintptr_t CCSPlayerController{};
 	uintptr_t C_CSPlayerPawn{};
 
 	int health{};

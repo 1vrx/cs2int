@@ -7,6 +7,10 @@
 #include "globals.h"
 #include "cheat/aim/aim.h"
 #include "cheat/visuals//visuals.h"
+#include "../ext/font.h"
+
+
+
 
 extern "C" __declspec(dllexport) int NextHook(int code, WPARAM wParam, LPARAM lParam) { return CallNextHookEx(NULL, code, wParam, lParam); } //ong this is detected and pasted
 
@@ -50,9 +54,11 @@ void cheat()
 	}
 	
 	
+	
 	std::this_thread::sleep_for(std::chrono::milliseconds(1));
 	
 }
+
 
 
 void InitImGui()
@@ -62,6 +68,11 @@ void InitImGui()
 	io.ConfigFlags = ImGuiConfigFlags_NoMouseCursorChange;
 	ImGui_ImplWin32_Init(window);
 	ImGui_ImplDX11_Init(pDevice, pContext);
+	
+	ImFontConfig font;
+	font.FontDataOwnedByAtlas = false;
+
+	io.Fonts->AddFontFromMemoryTTF((void*)frank_goth, sizeof(frank_goth), 18, &font);
 }
 
 LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
@@ -71,6 +82,9 @@ LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 
 	return CallWindowProc(oWndProc, hWnd, uMsg, wParam, lParam);
 }
+
+
+
 
 bool init = false;
 HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT Flags)
@@ -102,16 +116,27 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
-
+	
 	if (toggle::menu)
 	{
 		ImGui::Begin("menu");
 
+		
+
+
+		ImGui::TextColored(ImColor(255, 255, 255), "aim:");
 		ImGui::Checkbox("aimbot", &toggle::aimbot);
+		ImGui::Checkbox("mouse_aimbot", &toggle::maimbot);
+		ImGui::SliderFloat("smoothing", &cheatsetting::aimSmooth, 0.1f, 100.f);
+		ImGui::SliderFloat("max distance to aim", &cheatsetting::aimDist, 10.f, 5000.f);
 		ImGui::NewLine();
+		ImGui::TextColored(ImColor(255, 255, 255), "visual:");
 		ImGui::Checkbox("boneESP", &toggle::skeleton);
-		ImGui::NewLine();
 		ImGui::Checkbox("tracers", &toggle::tracers);
+		ImGui::Checkbox("healthESP", &toggle::healthESP);
+		ImGui::Checkbox("glow", &toggle::glow);
+		ImGui::NewLine();
+		ImGui::Checkbox("test", &toggle::newentlist);
 		ImGui::End();
 	}
 	
@@ -125,6 +150,13 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 		if (GetAsyncKeyState(VK_RBUTTON))
 			aim::Aimbot();
 	}
+	
+	if (toggle::maimbot)
+	{
+		if (GetAsyncKeyState(VK_RBUTTON))
+			aim::mouse_aimbot();
+	}
+	
 	if (toggle::esp)
 	{
 		visual::PlayerESP();
@@ -137,11 +169,29 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 	{
 		visual::BoneESP();
 	}
+	if (toggle::healthESP)
+	{
+		visual::HealthESP();
+	}
+	if (toggle::newentlist)
+	{
+		entlist::IntIt();
+	}
+	/*if (toggle::glow)
+	{
+		visual::Glow(1);
+	}
+	if (!toggle::glow)
+	{
+		visual::Glow(0);
+	}
+	*/
+	
 
 	
 
-	ImGui::GetBackgroundDrawList()->AddText({ 29, 21 }, ImColor(0, 0, 0), "CS2 Internal");
-	ImGui::GetBackgroundDrawList()->AddText({ 30, 20 }, ImColor(255, 255, 255), "CS2 Internal");
+	ImGui::GetBackgroundDrawList()->AddText({ 29, 21 }, ImColor(0, 0, 0), "powered with VAC.CC V1.1");
+	ImGui::GetBackgroundDrawList()->AddText({ 30, 20 }, ImColor(255, 255, 255), "powered with VAC.CC V1.1");
 	
 	
 
@@ -155,6 +205,8 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 DWORD WINAPI MainThread(LPVOID lpReserved)
 {
 	
+
+
 	AllocConsole();
 	FILE* f;
 	freopen_s(&f, "CONOUT$", "w", stdout);

@@ -71,3 +71,7 @@ const bool Vec3::W2S(Vec2& out, float(*ViewMatrix)[4][4])
 }
 
 
+float vec2Dist(Vec3 vec)
+{
+	return sqrt((vec.x * vec.x) + (vec.y * vec.y) + (vec.z * vec.z));
+}

@@ -82,7 +82,7 @@
     <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x64;$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\Users\caleb\libs\gfuck\SRC;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x64;$(LibraryPath)</LibraryPath>
     <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
     <TargetName>test</TargetName>
   </PropertyGroup>
@@ -145,6 +145,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\cheat\sdk\CEntity.cpp" />
+    <ClCompile Include="src\cheat\visuals\world\aspectfov.cpp" />
     <ClCompile Include="src\cheat\aim\aim.cpp" />
     <ClCompile Include="src\math\mymath.cpp" />
     <ClCompile Include="src\cheat\entlist.cpp" />
@@ -171,6 +173,10 @@
     <ResourceCompile Include="ext\kiero\minhook\dll_resources\MinHook.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\cheat\sdk\CEntity.h" />
+    <ClInclude Include="src\cheat\visuals\world\aspectfov.h" />
+    <ClInclude Include="ext\font.h" />
+    <ClInclude Include="ext\patternscan.h" />
     <ClInclude Include="src\cheat\aim\aim.h" />
     <ClInclude Include="src\math\mymath.h" />
     <ClInclude Include="src\cheat\entlist.h" />
