@@ -1,19 +1,21 @@
 __**CS2 Internal Cheat**__
 
 
-*HAS*  
-
+*HAS*    
+  
+Menu
 Aimbot  
 Tracers  
 BoneESP
 
        
 *todo*:  
+Fix Entlist - make C_CSPlayerPawn and CCSPlayerController caching [  turn the array into a vector for optimization  ]  
+Add more aimsettings [  fix the smoothing math  ]  
+fix the box & health esp [  soon  ]  
+add flags [  defusing, helmet_kevlar, scoped etc  ]  
 
-add chams  
-aimbot settings   
-rcs  
-menu  
+
 
 
 
