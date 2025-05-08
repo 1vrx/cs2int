@@ -103,26 +103,41 @@ namespace entlist
 
 	void Init()
 	{
+		std::cout << "\nCalledInit";
+		const uintptr_t entity_list = *(uintptr_t*)(globals::modBase + o::client::dwEntityList);
+		if (!entity_list)
+			return;
+
+		std::cout << "\n FoundENTLIST ";
+
+
 		std::cout << "\nCalledEntlist";
-		players[0].CCSPlayerController = (globals::modBase + o::client::dwLocalPlayerController);
+		
 
 		for (int i = 0; i < 64; i++) //starts from local player (0)
 		{
 			std::cout << "\nLoop iteration: " << i + 1;
 			//C_BaseEntity
 			uintptr_t entity = *(uintptr_t*)(globals::modBase + o::client::dwEntityList + (0x10 * i));
-			entlist::players[i].C_CSPlayerPawn = *(uintptr_t*)(globals::modBase + o::client::dwEntityList + (0x10 * i));
-
-			
-			
-			
-
-		
-
-
 			
 			if (!entity)
 				break;
+
+			pawn[i].SetBase(entity);
+
+			std::cout << "\nset pawn";
+
+			uintptr_t controllerentry = *(uintptr_t*)(entity_list + (8 * ((i + 1) & 0x7FFF) >> 9) + 16);
+			if (!controllerentry)
+				break;
+
+			const uintptr_t player = *(uintptr_t*)(controllerentry + 120 * ((i + 1) & 0x1FF));
+			if (!player)
+				continue;
+
+			controller[i].SetCCSPlayerController(player);
+
+			std::cout << "\nSetController";
 			
 
 			uintptr_t gamescene = *(uintptr_t*)(entity + 0x328);
@@ -142,6 +157,11 @@ namespace entlist
 			players[i].headpos = *(Vec3*)(bonearray + 6 * 32);
 
 			
+			//Vec3 headPosition = pawn[i].GetBonePos(6);
+			//std::cout << "\nGotNewHead";
+
+			//std::cout << "\nheadpos 1 vs 2 " << headPosition.x << " " << players[i].headpos.x;
+
 			players[i].pos = *(Vec3*)(entity + o::C_CSPlayerPawn::m_vOrigin);
 			players[i].team = *(int*)(entity + o::C_CSPlayerPawn::m_iTeamNum);
 			players[i].angle = *(Vec3*)(entity + o::C_CSPlayerPawn::unknown_vCam);		//unknwon_vCam is the players eye angle i believe, should work for all entites [cannot be written]

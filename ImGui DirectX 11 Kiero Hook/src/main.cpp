@@ -177,15 +177,7 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 	{
 		entlist::IntIt();
 	}
-	/*if (toggle::glow)
-	{
-		visual::Glow(1);
-	}
-	if (!toggle::glow)
-	{
-		visual::Glow(0);
-	}
-	*/
+	
 	
 
 	

@@ -49,7 +49,18 @@ public:
 	{
 		*(float*)(base + o::C_CSPlayerPawn::m_pGlowServices) = val; // 100000.f = on			0.f = off
 	}
+
+	Vec3 GetBonePos(unsigned int bone)
+	{
+		uintptr_t gamescene = *(uintptr_t*)(base + 0x328);
+		uintptr_t bonearray = *(uintptr_t*)(gamescene + 0x170 + 0x80);
+
+		
+		return *(Vec3*)(bonearray + bone * 32);
+	}
 };
+
+
 
 struct CCSPlayerController {
 private:

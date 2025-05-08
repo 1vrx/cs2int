@@ -79,6 +79,7 @@ namespace visual
 			Vec3 v3_R_thigh		= *(Vec3*)(bonearray + 25 * 32);
 			Vec3 v3_R_foot		= *(Vec3*)(bonearray + 27 * 32);
 			
+			
 			//check they are in view :
 			if (
 				!v3head.W2S(v2head, ViewMatrix)			&&
@@ -163,6 +164,7 @@ namespace visual
 
 			entlist::players[i].headpos.W2S(screenhead, ViewMatrix);
 			entlist::players[i].pos.W2S(screenfeet, ViewMatrix);
+			int enthp = entlist::pawn[i].GetHealth();
 
 
 			//ImGui::GetBackgroundDrawList()->AddRectFilled({/*min X and Y VAL*/ });

@@ -30,17 +30,7 @@ Vec3 calcAngle(Vec3 local, Vec3 target)
 	final.y = std::atan2(dy, dx) * (180.0f / std::numbers::pi_v<float>);
 	final.z = 0.0f;
 
-	//ignore this for now
-
-	//if (local.x == entlist::players[0].pos.x)
-	//{
-	//	std::cout << "\n[angle calculation debug]";
-	//	std::cout << "\n[DELTA VALUES] dx/dy/dz " << dx << " / " << dy << " / " << dz;
-	//	std::cout << "\n[DEBUG ANGLES] our initial angles - pitch/yaw/roll\n" << entlist::players[0].angle.x << " / " << entlist::players[0].angle.y << " / " << entlist::players[0].angle.z;
-	//	std::cout << "\ncalculated angles in radians: pitch/yaw/roll\n" << atan2f(dy, dx) << " / " << atan2f(dz, dy) << " / " << entlist::players[0].angle.z;
-	//	std::cout << "\ncalculated angles in degrees: pitch/yaw/roll\n" << RadToDegree<float>(atan2f(dy, dx)) << " / " << RadToDegree<float>(atan2f(dz, dy)) << " / " << entlist::players[0].angle.z;
-	//}
-	//
+	
 	return final;
 
 	
