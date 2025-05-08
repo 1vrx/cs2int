@@ -11,8 +11,8 @@ BoneESP
        
 *todo*:  
 Fix Entlist - make C_CSPlayerPawn and CCSPlayerController caching [  turn the array into a vector for optimization  ]  
-Add more aimsettings [  fix the smoothing math  ]  
-fix the box & health esp [  soon  ]  
+Add more aimsettings [  fix the smoothing math  ]    
+recode the esp [  box and health are broken + include new ent list  ]
 add flags [  defusing, helmet_kevlar, scoped etc  ]  
 
 
