@@ -14,14 +14,20 @@ namespace aim
 		//new entity to send 
 
 		Entity eNearest;
-		eNearest.pos = { 100, 100, 100 };
+		eNearest.pos = { 100.f, 100.f, 100.f };
 
 
 		//loop till closest player
 		for (int i = 1; i <= entlist::entcount; i++)
 		{
-
+			std::cout << "\n\ninitializing loop to find nearest ent: here are the coords: \n" << entlist::players[i].headpos.x << " | " << entlist::players[i].headpos.y << " | " << entlist::players[i].headpos.z << "\n";
 			float entdist = calcDist(entlist::players[0].headpos, entlist::players[i].headpos);
+			
+			if (entlist::players[i].headpos.x == 0.f && entlist::players[i].headpos.y == 0.f && entlist::players[i].headpos.z == 0)
+				continue;
+
+			if (entlist::players[i].headpos.x == 100.f && entlist::players[i].headpos.y == 100.f && entlist::players[i].headpos.z == 100.f)
+				continue;
 
 			if (entlist::players[i].team != entlist::players[0].team)
 			{
@@ -101,7 +107,7 @@ namespace aim
 		std::cout << "[aimbot] nor_angles xyz: " << angle_to_aim.x << " " << angle_to_aim.y;
 
 
-		std::cout << "\nNearest Ent Coords: " << target.pos.x << " | " << target.pos.y << " | " << target.pos.z << " Dist: " << calcDist(entlist::players[0].pos, target.pos);
+		std::cout << "\nNearest Ent Coords: " << target.headpos.x << " | " << target.headpos.y << " | " << target.headpos.z << " Dist: " << calcDist(entlist::players[0].headpos, target.headpos);
 		std::cout << "\naiming @: " << entlist::players[0].angle.x << " " << entlist::players[0].angle.y;
 		std::cout << "\nshould be aiming @: " << angle_to_aim.x << " " << angle_to_aim.y;
 
@@ -111,7 +117,7 @@ namespace aim
 			return;
 		
 		
-		old_angles = *(Vec3*)(globals::modBase + o::client::dwViewAngles);
+		//old_angles = *(Vec3*)(globals::modBase + o::client::dwViewAngles);
 
 		//auto delta = (angle_to_aim - old_angles);
 

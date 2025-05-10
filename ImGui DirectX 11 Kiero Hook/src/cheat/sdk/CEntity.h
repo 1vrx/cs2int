@@ -58,6 +58,11 @@ public:
 		
 		return *(Vec3*)(bonearray + bone * 32);
 	}
+
+	Vec3 GetOrigin()
+	{
+		return *(Vec3*)(base + o::C_CSPlayerPawn::m_vOrigin);
+	}
 };
 
 

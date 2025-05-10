@@ -24,6 +24,7 @@ namespace toggle
 	extern bool glow;
 
 	extern bool newentlist;
+	extern bool watermark;
 	
 
 

@@ -14,6 +14,7 @@ namespace toggle
 	bool glow = false;
 
 	bool newentlist = false;
+	bool watermark = false;
 	
 	
 }

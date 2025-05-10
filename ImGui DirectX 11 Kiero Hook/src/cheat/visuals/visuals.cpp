@@ -7,6 +7,7 @@ namespace device
 	extern float resY = GetSystemMetrics(SM_CYSCREEN);
 
 	const ImVec2 midPoint = { (resX / 2), (resY / 2) };
+	const ImVec2 midTop = { (resX / 2), 0 };
 }
 
 namespace visual
@@ -38,11 +39,13 @@ namespace visual
 			
 			std::cout << "\n[DEBUG] feetpos (screen) = x/y " << screenfeet.x << " / " << screenfeet.y;
 			std::cout << "\n[DEBUG] headpos (screen) = x/y " << screenhead.x << " / " << screenhead.y;
-			
+			screenhead.y = screenfeet.y + 67.f;
 			float height = (screenfeet.y - screenhead.y) * 1.5f;
-			float width = height / 1.5f;
-			ImGui::GetBackgroundDrawList()->AddRect({ screenfeet.x - width / 2, screenhead.y }, { (screenfeet.x - width / 2) + width, screenhead.y + height }, ImColor(255, 255, 255));
-			std::cout << "ESP Should be drawn";
+			float width = height / 2.f;
+			float x = screenfeet.x - width / 2;
+			ImGui::GetBackgroundDrawList()->AddRect({ screenfeet.x - width / 2, screenhead.y}, { (screenfeet.x - width / 2) + width, screenhead.y + height }, ImColor(255, 255, 255));
+			
+			std::cout << "\nboxesp_drawn";
 			
 			
 			
@@ -141,7 +144,9 @@ namespace visual
 		
 			
 		
-			ImGui::GetBackgroundDrawList()->AddLine(device::midPoint, { screenhead.x, screenhead.y }, ImColor(255, 255, 255));
+			
+				ImGui::GetBackgroundDrawList()->AddLine(device::midTop, {screenhead.x, screenhead.y}, ImColor(255, 255, 255));
+			
 
 			
 

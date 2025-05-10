@@ -134,9 +134,18 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 		ImGui::Checkbox("boneESP", &toggle::skeleton);
 		ImGui::Checkbox("tracers", &toggle::tracers);
 		ImGui::Checkbox("healthESP", &toggle::healthESP);
+		ImGui::Checkbox("boxESP", &toggle::esp);
 		ImGui::Checkbox("glow", &toggle::glow);
 		ImGui::NewLine();
+		ImGui::TextColored(ImColor(255, 255, 255), "misc");
+		ImGui::Checkbox("watermark", &toggle::watermark);
+		ImGui::NewLine();
+		ImGui::NewLine();
 		ImGui::Checkbox("test", &toggle::newentlist);
+		
+		ImGui::NextColumn();
+		ImGui::Text("developed in");
+		ImGui::Text("JAiPUR");
 		ImGui::End();
 	}
 	
@@ -177,13 +186,17 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 	{
 		entlist::IntIt();
 	}
+	if (toggle::watermark)
+	{
+		ImGui::GetBackgroundDrawList()->AddText({ 29, 21 }, ImColor(0, 0, 0), "JAiPURhook");
+		ImGui::GetBackgroundDrawList()->AddText({ 30, 20 }, ImColor(255, 255, 255), "JAiPURhook");
+	}
 	
 	
 
 	
 
-	ImGui::GetBackgroundDrawList()->AddText({ 29, 21 }, ImColor(0, 0, 0), "powered with VAC.CC V1.1");
-	ImGui::GetBackgroundDrawList()->AddText({ 30, 20 }, ImColor(255, 255, 255), "powered with VAC.CC V1.1");
+	
 	
 	
 

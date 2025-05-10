@@ -166,10 +166,11 @@ namespace entlist
 			players[i].team = *(int*)(entity + o::C_CSPlayerPawn::m_iTeamNum);
 			players[i].angle = *(Vec3*)(entity + o::C_CSPlayerPawn::unknown_vCam);		//unknwon_vCam is the players eye angle i believe, should work for all entites [cannot be written]
 		
+			//std::cout << "\n\n\nENTITY " << i + 1 << " position: X | Y | Z " << players[i].pos.x << " | " << players[i].pos.y << " | " << players[i].pos.z;
 			
 
-			//			std::cout << "\nENT INDEX: " << i << " " << "ENT HP: " << players[i].health << "\nEntPos: " << players[i].pos.x << " " << players[i].pos.y << " " << players[i].pos.z << " Team: " << players[i].team
-			//				  << "\nHeadPos: " << players[i].headpos.x << " " << players[i].headpos.y << " " << players[i].headpos.z;
+						std::cout << "\nENT INDEX: " << i + 1 << " " << "ENT HP: " << players[i].health << "\nEntPos: " << players[i].pos.x << " " << players[i].pos.y << " " << players[i].pos.z << " Team: " << players[i].team
+							  << "\nHeadPos: " << players[i].headpos.x << " " << players[i].headpos.y << " " << players[i].headpos.z;
 			entcount = i + 1;
 
 			
