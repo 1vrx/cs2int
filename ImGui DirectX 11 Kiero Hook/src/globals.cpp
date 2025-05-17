@@ -24,11 +24,20 @@ namespace cheatsetting
 	float smoothing = 15.0f;
 	float renderDist = 1000.f;
 	float aimDist = 1000.f;
-	float aimSmooth = 4.f;
+	float aimSmooth = 1.f;
 
 
 	float fwidth = 0.f;
 	float fheight = 0.f;
 
 	float aimfov = 0.f;
+}
+
+namespace color
+{
+
+
+	int r_bone = 255.f;
+	int g_bone = 255.f;
+	int b_bone = 255.f;
 }

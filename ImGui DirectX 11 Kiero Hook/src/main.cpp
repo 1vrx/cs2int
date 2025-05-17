@@ -113,6 +113,7 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 
 	cheat();
 	
+
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
@@ -133,6 +134,9 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 		ImGui::NewLine();
 		ImGui::TextColored(ImColor(255, 255, 255), "visual:");
 		ImGui::Checkbox("boneESP", &toggle::skeleton);
+		ImGui::SliderInt("r_bone", &color::r_bone, 0, 255);
+		ImGui::SliderInt("g_bone", &color::g_bone, 0, 255);
+		ImGui::SliderInt("b_bone", &color::b_bone, 0, 255);
 		ImGui::Checkbox("tracers", &toggle::tracers);
 		ImGui::Checkbox("healthESP", &toggle::healthESP);
 		ImGui::Checkbox("boxESP", &toggle::esp);
@@ -220,6 +224,10 @@ DWORD WINAPI MainThread(LPVOID lpReserved)
 	FILE* f;
 	freopen_s(&f, "CONOUT$", "w", stdout);
 	SetConsoleTitle("debug window");
+
+
+	std::cout << "[ :: ] cheat loaded\n" <<
+		"[ :: ] located base 0x" << std::hex << globals::modBase;
 
 	bool init_hook = false;
 	do

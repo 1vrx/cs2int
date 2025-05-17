@@ -113,16 +113,16 @@ namespace visual
 			v3_R_foot.W2S(v2_R_foot, ViewMatrix);
 			
 			//draw the lines
-			ImGui::GetBackgroundDrawList()->AddLine({v2head.x, v2head.y}, {v2spine2.x, v2spine2.y}, ImColor(255, 255, 255));	//head to spine [maybe i should do neck]
-			ImGui::GetBackgroundDrawList()->AddLine({ v2spine2.x, v2spine2.y }, { v2pelvis.x, v2pelvis.y }, ImColor(255, 255, 255));	//spine to pelvis
-			ImGui::GetBackgroundDrawList()->AddLine({ v2spine2.x, v2spine2.y }, { v2_L_elbow.x, v2_L_elbow.y }, ImColor(255, 255, 255));	//spine to left_elbow
-			ImGui::GetBackgroundDrawList()->AddLine({ v2spine2.x, v2spine2.y }, { v2_R_elbow.x, v2_R_elbow.y }, ImColor(255, 255, 255));	//spine to right_elbow
-			ImGui::GetBackgroundDrawList()->AddLine({ v2_L_elbow.x, v2_L_elbow.y }, { v2_L_hand.x, v2_L_hand.y }, ImColor(255, 255, 255));	//left elbow to left hand
-			ImGui::GetBackgroundDrawList()->AddLine({ v2_R_elbow.x, v2_R_elbow.y }, { v2_R_hand.x, v2_R_hand.y }, ImColor(255, 255, 255));	//right elbow to right hand
-			ImGui::GetBackgroundDrawList()->AddLine({ v2pelvis.x, v2pelvis.y }, { v2_L_thigh.x, v2_L_thigh.y }, ImColor(255, 255, 255));	//pelvis to left_thigh
-			ImGui::GetBackgroundDrawList()->AddLine({ v2pelvis.x, v2pelvis.y }, { v2_R_thigh.x, v2_R_thigh.y }, ImColor(255, 255, 255));	//pelvis to right_thigh
-			ImGui::GetBackgroundDrawList()->AddLine({ v2_L_thigh.x, v2_L_thigh.y }, { v2_L_foot.x, v2_L_foot.y }, ImColor(255, 255, 255));	//left_thigh to left_foot
-			ImGui::GetBackgroundDrawList()->AddLine({ v2_R_thigh.x, v2_R_thigh.y }, { v2_R_foot.x, v2_R_foot.y }, ImColor(255, 255, 255));	//right_thigh to right_foot
+			ImGui::GetBackgroundDrawList()->AddLine({v2head.x, v2head.y}, {v2spine2.x, v2spine2.y}, ImColor(color::r_bone, color::g_bone, color::b_bone));	//head to spine [maybe i should do neck]
+			ImGui::GetBackgroundDrawList()->AddLine({ v2spine2.x, v2spine2.y }, { v2pelvis.x, v2pelvis.y }, ImColor(color::r_bone, color::g_bone, color::b_bone));	//spine to pelvis
+			ImGui::GetBackgroundDrawList()->AddLine({ v2spine2.x, v2spine2.y }, { v2_L_elbow.x, v2_L_elbow.y }, ImColor(color::r_bone, color::g_bone, color::b_bone));	//spine to left_elbow
+			ImGui::GetBackgroundDrawList()->AddLine({ v2spine2.x, v2spine2.y }, { v2_R_elbow.x, v2_R_elbow.y }, ImColor(color::r_bone, color::g_bone, color::b_bone));	//spine to right_elbow
+			ImGui::GetBackgroundDrawList()->AddLine({ v2_L_elbow.x, v2_L_elbow.y }, { v2_L_hand.x, v2_L_hand.y }, ImColor(color::r_bone, color::g_bone, color::b_bone));	//left elbow to left hand
+			ImGui::GetBackgroundDrawList()->AddLine({ v2_R_elbow.x, v2_R_elbow.y }, { v2_R_hand.x, v2_R_hand.y }, ImColor(color::r_bone, color::g_bone, color::b_bone));	//right elbow to right hand
+			ImGui::GetBackgroundDrawList()->AddLine({ v2pelvis.x, v2pelvis.y }, { v2_L_thigh.x, v2_L_thigh.y }, ImColor(color::r_bone, color::g_bone, color::b_bone));	//pelvis to left_thigh
+			ImGui::GetBackgroundDrawList()->AddLine({ v2pelvis.x, v2pelvis.y }, { v2_R_thigh.x, v2_R_thigh.y }, ImColor(color::r_bone, color::g_bone, color::b_bone));	//pelvis to right_thigh
+			ImGui::GetBackgroundDrawList()->AddLine({ v2_L_thigh.x, v2_L_thigh.y }, { v2_L_foot.x, v2_L_foot.y }, ImColor(color::r_bone, color::g_bone, color::b_bone));	//left_thigh to left_foot
+			ImGui::GetBackgroundDrawList()->AddLine({ v2_R_thigh.x, v2_R_thigh.y }, { v2_R_foot.x, v2_R_foot.y }, ImColor(color::r_bone, color::g_bone, color::b_bone));	//right_thigh to right_foot
 			
 
 

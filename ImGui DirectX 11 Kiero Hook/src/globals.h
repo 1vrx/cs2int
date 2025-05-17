@@ -46,6 +46,14 @@ namespace cheatsetting
 	
 }
 
+namespace color
+{
+
+
+	extern int r_bone;
+	extern int g_bone;
+	extern int b_bone;
+}
 
 
 
