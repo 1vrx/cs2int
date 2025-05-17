@@ -21,7 +21,8 @@ add flags [  defusing, helmet_kevlar, scoped etc  ]
 
 
 
-bone esp  
+current look:  
 
-![image](https://github.com/user-attachments/assets/bb45bd02-2275-48e4-af6c-a5d11357e241)
+![image](https://github.com/user-attachments/assets/4cd2c8b4-05d5-4360-be8b-920525a39487)
+
 
