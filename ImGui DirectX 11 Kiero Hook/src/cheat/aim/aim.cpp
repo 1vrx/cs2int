@@ -93,8 +93,10 @@ namespace aim
 
 		//for now the target will be the nearest entity.
 		Entity target = GetNearest();
-		if (target.health < 0)
+		if (target.health <= 0)
 			return;
+
+		float desiredfov = cheatsetting::aimfov;
 
 		//calculating the angle (in degrees) between me and the opponent
 		raw_angles = calcAngle(entlist::players[0].headpos, target.headpos);
@@ -112,12 +114,25 @@ namespace aim
 		std::cout << "\nshould be aiming @: " << angle_to_aim.x << " " << angle_to_aim.y;
 
 		//commenting this out because im using a hold to aim currently so not needed.
+
+		old_angles = *(Vec3*)(globals::modBase + o::client::dwViewAngles);
 		
 		if (calcDist(entlist::players[0].headpos, target.pos) > cheatsetting::aimDist)
 			return;
 		
+		const auto curfov = std::hypot(angle_to_aim.x, angle_to_aim.y);
+
+		if (curfov < desiredfov)
+		{
+			desiredfov = curfov;
+			angle_to_aim = angle_to_aim;
+		}
+		if (curfov > desiredfov)
+		{
+			return;
+		}
 		
-		//old_angles = *(Vec3*)(globals::modBase + o::client::dwViewAngles);
+		
 
 		//auto delta = (angle_to_aim - old_angles);
 

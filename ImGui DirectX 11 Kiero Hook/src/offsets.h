@@ -6,11 +6,11 @@ namespace o
 {
 	namespace client
 	{
-		constexpr int dwLocalPlayer		= 0x184B0D0;		//ptr to C_CSPlayerPawn
-		constexpr int dwLocalPlayerController = 0x1A459E0;
-		constexpr int dwEntityList		= 0x1858B90;		//localtion of entlist 10bytes between each ent	1858C10 client.dll+1858C10
-		constexpr int dwViewAngles		= 0x1A6A2C0;		//this is eye angle, camera is different - silent aim soon  //OLD : 0x1A6A210
-		constexpr int dwViewMatrix		= 0x1A5FED0;		//float[4][4]		0x1A89070
+		constexpr int dwLocalPlayer		= 0x184C0D0;		//ptr to C_CSPlayerPawn
+		constexpr int dwLocalPlayerController = 0x1A469E0;
+		constexpr int dwEntityList		= 0x1859B90;		//localtion of entlist 10bytes between each ent	1858C10 client.dll+1858C10	1859B90
+		constexpr int dwViewAngles		= 0x1A6B2D0;		//this is eye angle, camera is different - silent aim soon  //OLD : 0x1A6A210
+		constexpr int dwViewMatrix		= 0x1A60EE0;		//float[4][4]		0x1A89070
 	}
 	namespace C_CSPlayerPawn		//C_BasePlayerPawn offsets work here as its a parent, same with C_BasePlay
 	{
@@ -27,6 +27,7 @@ namespace o
 	namespace CCSPlayerController
 	{
 		constexpr int m_iPing			= 0x740;
+		constexpr int m_sSanitizedPlayerName = 0x778;
 	}
 	namespace all
 	{

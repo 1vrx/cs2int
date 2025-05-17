@@ -36,7 +36,21 @@ namespace cheatsetting
 	extern float renderDist;
 	extern float aimDist;
 	extern float aimSmooth;
+
+
+
+	extern float fwidth;
+	extern float fheight;
+
+	extern float aimfov;
+	
 }
+
+
+
+
+
+
 
 class Entity
 {

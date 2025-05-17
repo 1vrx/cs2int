@@ -25,4 +25,10 @@ namespace cheatsetting
 	float renderDist = 1000.f;
 	float aimDist = 1000.f;
 	float aimSmooth = 4.f;
+
+
+	float fwidth = 0.f;
+	float fheight = 0.f;
+
+	float aimfov = 0.f;
 }

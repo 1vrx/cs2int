@@ -37,13 +37,13 @@ namespace visual
 			if (!entlist::players[i].pos.W2S(screenfeet, ViewMatrix) && entlist::players[i].headpos.W2S(screenhead, ViewMatrix))
 				continue;
 			
-			std::cout << "\n[DEBUG] feetpos (screen) = x/y " << screenfeet.x << " / " << screenfeet.y;
-			std::cout << "\n[DEBUG] headpos (screen) = x/y " << screenhead.x << " / " << screenhead.y;
+			std::cout << "\n[BOX ESP DEBUG] feetpos (screen) = " << screenfeet.x << " / " << screenfeet.y;
+			std::cout << "\n[BOX ESP DEBUG] headpos (screen) = " << screenhead.x << " / " << screenhead.y;
 			screenhead.y = screenfeet.y + 67.f;
 			float height = (screenfeet.y - screenhead.y) * 1.5f;
 			float width = height / 2.f;
 			float x = screenfeet.x - width / 2;
-			ImGui::GetBackgroundDrawList()->AddRect({ screenfeet.x - width / 2, screenhead.y}, { (screenfeet.x - width / 2) + width, screenhead.y + height }, ImColor(255, 255, 255));
+			ImGui::GetBackgroundDrawList()->AddRect({ screenfeet.x - cheatsetting::fwidth / 2, screenhead.y}, { (screenfeet.x - width / 2) + cheatsetting::fwidth, screenhead.y + height }, ImColor(255, 255, 255));
 			
 			std::cout << "\nboxesp_drawn";
 			

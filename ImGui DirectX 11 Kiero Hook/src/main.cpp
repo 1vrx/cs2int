@@ -128,6 +128,7 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 		ImGui::Checkbox("aimbot", &toggle::aimbot);
 		ImGui::Checkbox("mouse_aimbot", &toggle::maimbot);
 		ImGui::SliderFloat("smoothing", &cheatsetting::aimSmooth, 0.1f, 100.f);
+		ImGui::SliderFloat("fov", &cheatsetting::aimfov, 0.1f, 180.f);
 		ImGui::SliderFloat("max distance to aim", &cheatsetting::aimDist, 10.f, 5000.f);
 		ImGui::NewLine();
 		ImGui::TextColored(ImColor(255, 255, 255), "visual:");
@@ -135,6 +136,9 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 		ImGui::Checkbox("tracers", &toggle::tracers);
 		ImGui::Checkbox("healthESP", &toggle::healthESP);
 		ImGui::Checkbox("boxESP", &toggle::esp);
+		ImGui::SliderFloat("width", &cheatsetting::fwidth, 0.f, 100.f);
+		ImGui::SliderFloat("height", &cheatsetting::fheight, 0.f, 100.f);
+
 		ImGui::Checkbox("glow", &toggle::glow);
 		ImGui::NewLine();
 		ImGui::TextColored(ImColor(255, 255, 255), "misc");
@@ -143,9 +147,8 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 		ImGui::NewLine();
 		ImGui::Checkbox("test", &toggle::newentlist);
 		
-		ImGui::NextColumn();
-		ImGui::Text("developed in");
-		ImGui::Text("JAiPUR");
+		ImGui::TextColored(ImColor(255, 255, 255), "debug info:");
+		ImGui::Text("found clientdll @: %#010u", globals::modBase);
 		ImGui::End();
 	}
 	
@@ -162,6 +165,7 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 	
 	if (toggle::maimbot)
 	{
+		ImGui::GetBackgroundDrawList()->AddCircle({ 960, 540 }, cheatsetting::aimfov / 2, ImColor(255, 255, 255));
 		if (GetAsyncKeyState(VK_RBUTTON))
 			aim::mouse_aimbot();
 	}
@@ -215,7 +219,7 @@ DWORD WINAPI MainThread(LPVOID lpReserved)
 	AllocConsole();
 	FILE* f;
 	freopen_s(&f, "CONOUT$", "w", stdout);
-	SetConsoleTitle("[ + ][ + ][ + ]");
+	SetConsoleTitle("debug window");
 
 	bool init_hook = false;
 	do
