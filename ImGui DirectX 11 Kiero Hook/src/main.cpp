@@ -137,13 +137,14 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 		ImGui::SliderInt("r_bone", &color::r_bone, 0, 255);
 		ImGui::SliderInt("g_bone", &color::g_bone, 0, 255);
 		ImGui::SliderInt("b_bone", &color::b_bone, 0, 255);
+		ImGui::SliderFloat("bone_thickness", &cheatsetting::bone_thickness, 1.f, 25.f);
 		ImGui::Checkbox("tracers", &toggle::tracers);
 		ImGui::Checkbox("healthESP", &toggle::healthESP);
 		ImGui::Checkbox("boxESP", &toggle::esp);
 		ImGui::SliderFloat("width", &cheatsetting::fwidth, 0.f, 100.f);
 		ImGui::SliderFloat("height", &cheatsetting::fheight, 0.f, 100.f);
 
-		ImGui::Checkbox("glow", &toggle::glow);
+		//ImGui::Checkbox("glow", &toggle::glow);		//crashinh
 		ImGui::NewLine();
 		ImGui::TextColored(ImColor(255, 255, 255), "misc");
 		ImGui::Checkbox("watermark", &toggle::watermark);
@@ -151,8 +152,8 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 		ImGui::NewLine();
 		ImGui::Checkbox("test", &toggle::newentlist);
 		
-		ImGui::TextColored(ImColor(255, 255, 255), "debug info:");
-		ImGui::Text("found clientdll @: %#010u", globals::modBase);
+		ImGui::TextColored(ImColor(255, 255, 255), "extra:");
+		ImGui::Text("source: https://github.com/1vrx/cs2int");
 		ImGui::End();
 	}
 	
@@ -196,8 +197,8 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 	}
 	if (toggle::watermark)
 	{
-		ImGui::GetBackgroundDrawList()->AddText({ 29, 21 }, ImColor(0, 0, 0), "JAiPURhook");
-		ImGui::GetBackgroundDrawList()->AddText({ 30, 20 }, ImColor(255, 255, 255), "JAiPURhook");
+		ImGui::GetBackgroundDrawList()->AddText({ 29, 21 }, ImColor(0, 0, 0), "JAiPURhook");			//shadow
+		ImGui::GetBackgroundDrawList()->AddText({ 30, 20 }, ImColor(255, 255, 255), "JAiPURhook");		//main text
 	}
 	
 	
@@ -227,7 +228,7 @@ DWORD WINAPI MainThread(LPVOID lpReserved)
 
 
 	std::cout << "[ :: ] cheat loaded\n" <<
-		"[ :: ] located base 0x" << std::hex << globals::modBase;
+		"[ :: ] located base 0x" << std::hex << globals::modBase << "\nPress F1 to initialize the entity list [required for cheat to work]";
 
 	bool init_hook = false;
 	do

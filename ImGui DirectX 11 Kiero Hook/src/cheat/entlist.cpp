@@ -103,15 +103,21 @@ namespace entlist
 
 	void Init()
 	{
+
+#ifdef __DEBUG
 		std::cout << "\nCalledInit";
+#endif
 		const uintptr_t entity_list = *(uintptr_t*)(globals::modBase + o::client::dwEntityList);
 		if (!entity_list)
 			return;
 
+#ifdef __DEBUG
 		std::cout << "\n FoundENTLIST ";
+#endif
 
-
+#ifdef __DEBUG
 		std::cout << "\nCalledEntlist";
+#endif
 		
 
 		for (int i = 0; i < 64; i++) //starts from local player (0)
@@ -148,6 +154,7 @@ namespace entlist
 
 			
 			players[i].health = *(int*)(entity + o::C_CSPlayerPawn::m_iHealth);
+			
 
 			if (players[i].health > 100 || players[i].health <= 0)
 				continue;

@@ -43,6 +43,8 @@ namespace cheatsetting
 	extern float fheight;
 
 	extern float aimfov;
+
+	extern float bone_thickness;
 	
 }
 

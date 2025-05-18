@@ -31,6 +31,9 @@ namespace cheatsetting
 	float fheight = 0.f;
 
 	float aimfov = 0.f;
+
+
+	float bone_thickness = 1.f;
 }
 
 namespace color

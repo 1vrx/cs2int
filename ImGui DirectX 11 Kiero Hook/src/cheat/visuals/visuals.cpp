@@ -43,7 +43,7 @@ namespace visual
 			float height = (screenfeet.y - screenhead.y) * 1.5f;
 			float width = height / 2.f;
 			float x = screenfeet.x - width / 2;
-			ImGui::GetBackgroundDrawList()->AddRect({ screenfeet.x - cheatsetting::fwidth / 2, screenhead.y}, { (screenfeet.x - width / 2) + cheatsetting::fwidth, screenhead.y + height }, ImColor(255, 255, 255));
+			ImGui::GetBackgroundDrawList()->AddRect({ screenfeet.x - width, screenhead.y - 10.f}, { (screenfeet.x - width / 2) + width, screenhead.y + height }, ImColor(255, 255, 255));
 			
 			std::cout << "\nboxesp_drawn";
 			
@@ -113,16 +113,16 @@ namespace visual
 			v3_R_foot.W2S(v2_R_foot, ViewMatrix);
 			
 			//draw the lines
-			ImGui::GetBackgroundDrawList()->AddLine({v2head.x, v2head.y}, {v2spine2.x, v2spine2.y}, ImColor(color::r_bone, color::g_bone, color::b_bone));	//head to spine [maybe i should do neck]
-			ImGui::GetBackgroundDrawList()->AddLine({ v2spine2.x, v2spine2.y }, { v2pelvis.x, v2pelvis.y }, ImColor(color::r_bone, color::g_bone, color::b_bone));	//spine to pelvis
-			ImGui::GetBackgroundDrawList()->AddLine({ v2spine2.x, v2spine2.y }, { v2_L_elbow.x, v2_L_elbow.y }, ImColor(color::r_bone, color::g_bone, color::b_bone));	//spine to left_elbow
-			ImGui::GetBackgroundDrawList()->AddLine({ v2spine2.x, v2spine2.y }, { v2_R_elbow.x, v2_R_elbow.y }, ImColor(color::r_bone, color::g_bone, color::b_bone));	//spine to right_elbow
-			ImGui::GetBackgroundDrawList()->AddLine({ v2_L_elbow.x, v2_L_elbow.y }, { v2_L_hand.x, v2_L_hand.y }, ImColor(color::r_bone, color::g_bone, color::b_bone));	//left elbow to left hand
-			ImGui::GetBackgroundDrawList()->AddLine({ v2_R_elbow.x, v2_R_elbow.y }, { v2_R_hand.x, v2_R_hand.y }, ImColor(color::r_bone, color::g_bone, color::b_bone));	//right elbow to right hand
-			ImGui::GetBackgroundDrawList()->AddLine({ v2pelvis.x, v2pelvis.y }, { v2_L_thigh.x, v2_L_thigh.y }, ImColor(color::r_bone, color::g_bone, color::b_bone));	//pelvis to left_thigh
-			ImGui::GetBackgroundDrawList()->AddLine({ v2pelvis.x, v2pelvis.y }, { v2_R_thigh.x, v2_R_thigh.y }, ImColor(color::r_bone, color::g_bone, color::b_bone));	//pelvis to right_thigh
-			ImGui::GetBackgroundDrawList()->AddLine({ v2_L_thigh.x, v2_L_thigh.y }, { v2_L_foot.x, v2_L_foot.y }, ImColor(color::r_bone, color::g_bone, color::b_bone));	//left_thigh to left_foot
-			ImGui::GetBackgroundDrawList()->AddLine({ v2_R_thigh.x, v2_R_thigh.y }, { v2_R_foot.x, v2_R_foot.y }, ImColor(color::r_bone, color::g_bone, color::b_bone));	//right_thigh to right_foot
+			ImGui::GetBackgroundDrawList()->AddLine({ v2head.x, v2head.y }, { v2spine2.x, v2spine2.y }, ImColor(color::r_bone, color::g_bone, color::b_bone), cheatsetting::bone_thickness);	//head to spine [maybe i should do neck]
+			ImGui::GetBackgroundDrawList()->AddLine({ v2spine2.x, v2spine2.y }, { v2pelvis.x, v2pelvis.y }, ImColor(color::r_bone, color::g_bone, color::b_bone), cheatsetting::bone_thickness);	//spine to pelvis
+			ImGui::GetBackgroundDrawList()->AddLine({ v2spine2.x, v2spine2.y }, { v2_L_elbow.x, v2_L_elbow.y }, ImColor(color::r_bone, color::g_bone, color::b_bone), cheatsetting::bone_thickness);	//spine to left_elbow
+			ImGui::GetBackgroundDrawList()->AddLine({ v2spine2.x, v2spine2.y }, { v2_R_elbow.x, v2_R_elbow.y }, ImColor(color::r_bone, color::g_bone, color::b_bone), cheatsetting::bone_thickness);	//spine to right_elbow
+			ImGui::GetBackgroundDrawList()->AddLine({ v2_L_elbow.x, v2_L_elbow.y }, { v2_L_hand.x, v2_L_hand.y }, ImColor(color::r_bone, color::g_bone, color::b_bone), cheatsetting::bone_thickness);	//left elbow to left hand
+			ImGui::GetBackgroundDrawList()->AddLine({ v2_R_elbow.x, v2_R_elbow.y }, { v2_R_hand.x, v2_R_hand.y }, ImColor(color::r_bone, color::g_bone, color::b_bone), cheatsetting::bone_thickness);	//right elbow to right hand
+			ImGui::GetBackgroundDrawList()->AddLine({ v2pelvis.x, v2pelvis.y }, { v2_L_thigh.x, v2_L_thigh.y }, ImColor(color::r_bone, color::g_bone, color::b_bone), cheatsetting::bone_thickness);	//pelvis to left_thigh
+			ImGui::GetBackgroundDrawList()->AddLine({ v2pelvis.x, v2pelvis.y }, { v2_R_thigh.x, v2_R_thigh.y }, ImColor(color::r_bone, color::g_bone, color::b_bone), cheatsetting::bone_thickness);	//pelvis to right_thigh
+			ImGui::GetBackgroundDrawList()->AddLine({ v2_L_thigh.x, v2_L_thigh.y }, { v2_L_foot.x, v2_L_foot.y }, ImColor(color::r_bone, color::g_bone, color::b_bone), cheatsetting::bone_thickness);	//left_thigh to left_foot
+			ImGui::GetBackgroundDrawList()->AddLine({ v2_R_thigh.x, v2_R_thigh.y }, { v2_R_foot.x, v2_R_foot.y }, ImColor(color::r_bone, color::g_bone, color::b_bone), cheatsetting::bone_thickness);	//right_thigh to right_foot
 			
 
 
@@ -170,6 +170,8 @@ namespace visual
 			entlist::players[i].headpos.W2S(screenhead, ViewMatrix);
 			entlist::players[i].pos.W2S(screenfeet, ViewMatrix);
 			int enthp = entlist::pawn[i].GetHealth();
+
+			
 
 
 			//ImGui::GetBackgroundDrawList()->AddRectFilled({/*min X and Y VAL*/ });
