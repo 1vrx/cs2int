@@ -1,6 +1,5 @@
 #include "visuals.h"
 
-
 namespace device
 {
 	extern float resX = GetSystemMetrics(SM_CXSCREEN);
@@ -41,9 +40,9 @@ namespace visual
 			std::cout << "\n[BOX ESP DEBUG] headpos (screen) = " << screenhead.x << " / " << screenhead.y;
 			screenhead.y = screenfeet.y + 67.f;
 			float height = (screenfeet.y - screenhead.y) * 1.5f;
-			float width = height / 2.f;
+			float width = height / 1.5f;
 			float x = screenfeet.x - width / 2;
-			ImGui::GetBackgroundDrawList()->AddRect({ screenfeet.x - width, screenhead.y - 10.f}, { (screenfeet.x - width / 2) + width, screenhead.y + height }, ImColor(255, 255, 255));
+			ImGui::GetBackgroundDrawList()->AddRect({ screenfeet.x - width / 2, screenhead.y - 10.f}, { (screenfeet.x - width / 2) + width, screenhead.y + height }, ImColor(255, 255, 255));
 			
 			std::cout << "\nboxesp_drawn";
 			
@@ -51,6 +50,9 @@ namespace visual
 			
 		}
 	}
+
+	
+
 	
 	void BoneESP() 
 	{

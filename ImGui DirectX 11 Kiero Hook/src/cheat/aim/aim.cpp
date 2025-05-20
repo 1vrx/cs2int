@@ -79,6 +79,13 @@ namespace aim
 		return angles;
 	}
 
+	Vec3 smoothen(Vec3 cur, Vec3 target)
+	{
+		Vec3 smoothedangle = cur - target;
+		smoothedangle.x = target.x + smoothedangle.x / 90.f * cheatsetting::aimSmooth;
+		smoothedangle.y = target.y + smoothedangle.y / 90.f * cheatsetting::aimSmooth;
+		return smoothedangle;
+	}
 
 
 
@@ -139,7 +146,12 @@ namespace aim
 		//auto final = (angle_to_aim + delta);
 
 		//*(Vec3*)(globals::modBase + o::client::dwViewAngles) = angle_to_aim;
-		*(Vec3*)(globals::modBase + o::client::dwViewAngles) = angle_to_aim / cheatsetting::aimSmooth;
+	
+
+
+		angle_to_aim = smoothen(entlist::players[0].angle, angle_to_aim);
+
+		*(Vec3*)(globals::modBase + o::client::dwViewAngles) = angle_to_aim;
 
 	
 
