@@ -51,6 +51,26 @@ namespace visual
 			
 		}
 	}
+
+	void NameESP()
+	{
+		for (int i = 1; i <= entlist::entcount; i++)
+		{
+			if (!entlist::players[i].pos.W2S(screenfeet, ViewMatrix) && entlist::players[i].headpos.W2S(screenhead, ViewMatrix))
+				continue;
+
+			std::string playername;
+
+			playername = entlist::controller[i].GetName();
+
+			const char name[11]{ playername[0],  playername[1], playername[2], playername[3], playername[4], playername[5], playername[6], playername[7], playername[8], playername[9], playername[10]};
+
+			ImGui::GetBackgroundDrawList()->AddText(ImVec2({ screenhead.x, screenhead.y - 10.f }), ImColor(255, 255, 255), name);
+		}
+	}
+
+	
+
 	
 	void BoneESP() 
 	{
