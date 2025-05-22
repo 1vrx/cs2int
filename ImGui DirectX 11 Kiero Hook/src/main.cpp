@@ -113,25 +113,90 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 
 	cheat();
 	
+	uintptr_t controller = *(uintptr_t*)(globals::modBase + o::client::dwLocalPlayerController);
+	std::string name = *(std::string*)(controller + o::CCSPlayerController::m_sSanitizedPlayerName);
 
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 	
-	if (toggle::menu)
+	/*if (toggle::menu)
 	{
-		ImGui::Begin("menu");
+		ImGui::Begin("jaipurhook");
 
+		{ ImGui::SameLine(); 
+		if (ImGui::Button(("aim"), ImVec2(150, 30)))
+		{
+			menu::tab = 0;
+		}
+		ImGui::SameLine();
+		if (ImGui::Button(("visual"), ImVec2(150, 30)))
+		{
+			menu::tab = 1;
+		}
+		ImGui::SameLine();
+		if (ImGui::Button(("misc"), ImVec2(150, 30)))
+		{
+			menu::tab = 2;
+		}
+		}
+		ImGui::NewLine();
+
+		if (menu::tab == 0)
+		{
+			ImGui::TextColored(ImColor(255, 255, 255), "aim:");
+			ImGui::Checkbox("aimbot", &toggle::aimbot);
+			ImGui::Checkbox("mouse_aimbot", &toggle::maimbot);
+			ImGui::SliderFloat("smoothing", &cheatsetting::aimSmooth, 0.1f, 100.f);
+			ImGui::SliderFloat("fov", &cheatsetting::aimfov, 0.1f, 180.f);
+			ImGui::SliderFloat("max distance to aim", &cheatsetting::aimDist, 10.f, 5000.f);
+		}
+		if (menu::tab == 1)
+		{
+			ImGui::TextColored(ImColor(255, 255, 255), "visual:");
+			ImGui::Checkbox("boneESP", &toggle::skeleton);
+			ImGui::SliderInt("r_bone", &color::r_bone, 0, 255);
+			ImGui::SliderInt("g_bone", &color::g_bone, 0, 255);
+			ImGui::SliderInt("b_bone", &color::b_bone, 0, 255);
+			ImGui::SliderFloat("bone_thickness", &cheatsetting::bone_thickness, 1.f, 25.f);
+			ImGui::Checkbox("tracers", &toggle::tracers);
+			ImGui::Checkbox("healthESP", &toggle::healthESP);
+			ImGui::Checkbox("boxESP", &toggle::esp);
+			ImGui::Checkbox("nameESP", &toggle::nameESP);
+			ImGui::SliderFloat("width", &cheatsetting::fwidth, 0.f, 100.f);
+			ImGui::SliderFloat("height", &cheatsetting::fheight, 0.f, 100.f);
+		}
+		if (menu::tab == 2)
+		{
+			
+			ImGui::TextColored(ImColor(255, 255, 255), "misc");
+			ImGui::Checkbox("watermark", &toggle::watermark);
+			ImGui::NewLine();
+			ImGui::NewLine();
+			ImGui::Checkbox("test", &toggle::newentlist);
+
+			ImGui::TextColored(ImColor(255, 255, 255), "extra:");
+			ImGui::Text("source: https://github.com/1vrx/cs2int");
+			
+		}
 		
+		ImGui::End();
+	}
+	*/
+
+	ImGui::Begin("jaipurhook");
 
 
+	ImGui::NewLine();
+
+	
 		ImGui::TextColored(ImColor(255, 255, 255), "aim:");
 		ImGui::Checkbox("aimbot", &toggle::aimbot);
 		ImGui::Checkbox("mouse_aimbot", &toggle::maimbot);
 		ImGui::SliderFloat("smoothing", &cheatsetting::aimSmooth, 0.1f, 100.f);
 		ImGui::SliderFloat("fov", &cheatsetting::aimfov, 0.1f, 180.f);
 		ImGui::SliderFloat("max distance to aim", &cheatsetting::aimDist, 10.f, 5000.f);
-		ImGui::NewLine();
+	
 		ImGui::TextColored(ImColor(255, 255, 255), "visual:");
 		ImGui::Checkbox("boneESP", &toggle::skeleton);
 		ImGui::SliderInt("r_bone", &color::r_bone, 0, 255);
@@ -141,22 +206,23 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 		ImGui::Checkbox("tracers", &toggle::tracers);
 		ImGui::Checkbox("healthESP", &toggle::healthESP);
 		ImGui::Checkbox("boxESP", &toggle::esp);
+		ImGui::Checkbox("nameESP", &toggle::nameESP);
 		ImGui::SliderFloat("width", &cheatsetting::fwidth, 0.f, 100.f);
 		ImGui::SliderFloat("height", &cheatsetting::fheight, 0.f, 100.f);
-
-		//ImGui::Checkbox("glow", &toggle::glow);		//crashinh
-		ImGui::NewLine();
+	
 		ImGui::TextColored(ImColor(255, 255, 255), "misc");
 		ImGui::Checkbox("watermark", &toggle::watermark);
 		ImGui::NewLine();
 		ImGui::NewLine();
 		ImGui::Checkbox("test", &toggle::newentlist);
-		
+
 		ImGui::TextColored(ImColor(255, 255, 255), "extra:");
 		ImGui::Text("source: https://github.com/1vrx/cs2int");
-		ImGui::End();
-	}
+
 	
+
+	ImGui::End();
+
 
 	if (toggle::enabled)
 	{
@@ -200,6 +266,10 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 		ImGui::GetBackgroundDrawList()->AddText({ 29, 21 }, ImColor(0, 0, 0), "JAiPURhook");			//shadow
 		ImGui::GetBackgroundDrawList()->AddText({ 30, 20 }, ImColor(255, 255, 255), "JAiPURhook");		//main text
 	}
+	if (toggle::nameESP)
+	{
+		visual::NameESP();
+	}
 	
 	
 
@@ -228,7 +298,8 @@ DWORD WINAPI MainThread(LPVOID lpReserved)
 
 
 	std::cout << "[ :: ] cheat loaded\n" <<
-		"[ :: ] located base 0x" << std::hex << globals::modBase << "\nPress F1 to initialize the entity list [required for cheat to work]";
+		"[ :: ] located base 0x" << std::hex << globals::modBase << "\nPress F1 to initialize the entity list [required for cheat to work]" << 
+		"\n[ + ] NameESP (dont use in single player)\n[ + ] Added BoneESP customization\n[ - ] Broke Aimbot\n[ * ] Ready to start adding tabs to menu";
 
 	bool init_hook = false;
 	do

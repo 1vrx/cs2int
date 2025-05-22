@@ -27,7 +27,7 @@ namespace o
 	namespace CCSPlayerController
 	{
 		constexpr int m_iPing			= 0x740;
-		constexpr int m_sSanitizedPlayerName = 0x778;
+		constexpr int m_sSanitizedPlayerName = 0x778;			// @vrx: CE [client.dll + dwLocalPlayerController] + m_sSanitzedPlayerName = YourName //:D gotta do 4 all ents
 	}
 	namespace all
 	{

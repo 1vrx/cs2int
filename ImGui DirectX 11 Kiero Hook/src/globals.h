@@ -22,12 +22,18 @@ namespace toggle
 	extern bool healthESP;
 	extern bool maimbot;
 	extern bool glow;
+	extern bool nameESP;
 
 	extern bool newentlist;
 	extern bool watermark;
 	
 
 
+}
+
+namespace menu
+{
+	extern int tab;
 }
 
 namespace cheatsetting

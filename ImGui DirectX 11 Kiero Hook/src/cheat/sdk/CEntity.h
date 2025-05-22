@@ -79,7 +79,16 @@ public:
 
 	int GetPing() const
 	{
-		return *(int*)(base + o::CCSPlayerController::m_iPing);
+	
+		int ping = *(int*)(base + o::CCSPlayerController::m_iPing);
+		if (!ping)
+			return 0;
+		return ping;
+	}
+
+	std::string GetName() const
+	{	
+		return *(std::string*)(base + o::CCSPlayerController::m_sSanitizedPlayerName);
 	}
 	
 };

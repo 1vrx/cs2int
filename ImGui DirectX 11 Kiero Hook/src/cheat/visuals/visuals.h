@@ -6,6 +6,7 @@
 namespace visual
 {
 	void PlayerESP();
+	void NameESP();
 	void BoneESP();
 	void Tracers();
 	void HealthESP();

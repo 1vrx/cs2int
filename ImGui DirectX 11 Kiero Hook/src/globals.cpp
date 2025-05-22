@@ -12,11 +12,17 @@ namespace toggle
 	bool healthESP = false;
 	bool maimbot = false;
 	bool glow = false;
+	bool nameESP = false;
 
 	bool newentlist = false;
 	bool watermark = false;
 	
 	
+}
+
+namespace menu
+{
+	int tab = 0;
 }
 
 namespace cheatsetting
