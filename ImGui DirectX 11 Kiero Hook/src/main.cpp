@@ -118,7 +118,8 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 	
-	/*if (toggle::menu)
+	
+	if (toggle::menu)
 	{
 		ImGui::Begin("jaipurhook");
 
@@ -148,6 +149,7 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 			ImGui::SliderFloat("smoothing", &cheatsetting::aimSmooth, 0.1f, 100.f);
 			ImGui::SliderFloat("fov", &cheatsetting::aimfov, 0.1f, 180.f);
 			ImGui::SliderFloat("max distance to aim", &cheatsetting::aimDist, 10.f, 5000.f);
+			ImGui::End();
 		}
 		if (menu::tab == 1)
 		{
@@ -163,6 +165,7 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 			ImGui::Checkbox("nameESP", &toggle::nameESP);
 			ImGui::SliderFloat("width", &cheatsetting::fwidth, 0.f, 100.f);
 			ImGui::SliderFloat("height", &cheatsetting::fheight, 0.f, 100.f);
+			ImGui::End();
 		}
 		if (menu::tab == 2)
 		{
@@ -175,13 +178,14 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 
 			ImGui::TextColored(ImColor(255, 255, 255), "extra:");
 			ImGui::Text("source: https://github.com/1vrx/cs2int");
+			ImGui::End();
 			
 		}
 		
-		ImGui::End();
+		
 	}
-	*/
-
+	
+	/*
 	if (toggle::menu)
 	{
 		ImGui::Begin("jaipurhook");
@@ -223,7 +227,7 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 
 		ImGui::End();
 	}
-
+	*/
 	if (toggle::enabled)
 	{
 		entlist::Init();
