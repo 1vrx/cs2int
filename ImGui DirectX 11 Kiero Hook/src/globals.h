@@ -9,6 +9,9 @@ namespace globals
 	const uintptr_t modBase = (uintptr_t)GetModuleHandleW(L"client.dll");
 	//const uintptr_t* LocalPlayer = (uintptr_t*)(modBase + o::client::dwLocalPlayer);	//currently causing LNK2005 issue... 
 	const Vec3 dwViewAngles = *(Vec3*)(modBase + o::client::dwViewAngles);
+
+	template <typename T>
+	uintptr_t relativeaddr(T addr);
 }
 
 namespace toggle
@@ -61,6 +64,11 @@ namespace color
 	extern int r_bone;
 	extern int g_bone;
 	extern int b_bone;
+}
+
+namespace draw
+{
+	
 }
 
 

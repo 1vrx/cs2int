@@ -88,6 +88,10 @@ public:
 
 	std::string GetName() const
 	{	
+		uintptr_t nameaddr = *(uintptr_t*)(base + o::CCSPlayerController::m_sSanitizedPlayerName);
+		if (!nameaddr)
+			return "Unknown";
+		
 		return *(std::string*)(base + o::CCSPlayerController::m_sSanitizedPlayerName);
 	}
 	

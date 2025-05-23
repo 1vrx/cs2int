@@ -33,13 +33,16 @@ namespace visual
 	{
 		for (int i = 0; i <= entlist::entcount; i++)
 		{
+
+			if (entlist::players[i].pos.x == entlist::players[0].pos.x)
+				continue;
 			
 			if (!entlist::players[i].pos.W2S(screenfeet, ViewMatrix) && entlist::players[i].headpos.W2S(screenhead, ViewMatrix))
 				continue;
 			
 			std::cout << "\n[BOX ESP DEBUG] feetpos (screen) = " << screenfeet.x << " / " << screenfeet.y;
 			std::cout << "\n[BOX ESP DEBUG] headpos (screen) = " << screenhead.x << " / " << screenhead.y;
-			screenhead.y = screenfeet.y + 67.f;
+			screenhead.y = screenfeet.y - 67.f;
 			float height = (screenfeet.y - screenhead.y) * 1.5f;
 			float width = height / 2.f;
 			float x = screenfeet.x - width / 2;
@@ -54,8 +57,11 @@ namespace visual
 
 	void NameESP()
 	{
-		for (int i = 1; i <= entlist::entcount; i++)
+		for (int i = 0; i <= entlist::entcount; i++)
 		{
+
+			
+
 			if (!entlist::players[i].pos.W2S(screenfeet, ViewMatrix) && entlist::players[i].headpos.W2S(screenhead, ViewMatrix))
 				continue;
 
@@ -63,8 +69,9 @@ namespace visual
 
 			playername = entlist::controller[i].GetName();
 
-			const char* name = playername.c_str();
-			ImGui::GetBackgroundDrawList()->AddText(ImVec2({ screenhead.x, screenhead.y - 10.f }), ImColor(255, 255, 255), name);
+
+			
+			ImGui::GetBackgroundDrawList()->AddText(ImVec2({ screenhead.x, screenhead.y - 10.f }), ImColor(255, 255, 255), playername.c_str());
 		}
 	}
 

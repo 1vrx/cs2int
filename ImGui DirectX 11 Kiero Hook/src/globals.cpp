@@ -1,5 +1,13 @@
 #include "globals.h"
 
+namespace globals
+{
+	template <typename T>
+	uintptr_t relativeaddr(T addr)
+	{
+		return ((uintptr_t)addr - globals::modBase);
+	}
+}
 
 namespace toggle
 {
@@ -49,4 +57,9 @@ namespace color
 	int r_bone = 255.f;
 	int g_bone = 255.f;
 	int b_bone = 255.f;
+}
+
+namespace draw
+{
+
 }

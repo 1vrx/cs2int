@@ -119,7 +119,7 @@ namespace entlist
 		std::cout << "\nCalledEntlist";
 #endif
 		
-
+		//commented for reminders 
 		for (int i = 0; i < 64; i++) //starts from local player (0)
 		{
 			std::cout << "\nLoop iteration: " << i + 1;
@@ -131,7 +131,8 @@ namespace entlist
 
 			pawn[i].SetBase(entity);
 
-			std::cout << "\nset pawn";
+			//std::cout << "\nset pawn @ 0x" << std::hex << globals::relativeaddr(entity) << std::dec;
+	
 
 			uintptr_t controllerentry = *(uintptr_t*)(entity_list + (8 * ((i + 1) & 0x7FFF) >> 9) + 16);
 			if (!controllerentry)
@@ -143,7 +144,7 @@ namespace entlist
 
 			controller[i].SetCCSPlayerController(player);
 
-			std::cout << "\nSetController";
+			//std::cout << "\nSetController @: 0x" << std::hex << (player - globals::modBase) << std::dec;
 			
 
 			uintptr_t gamescene = *(uintptr_t*)(entity + 0x328);
@@ -163,6 +164,8 @@ namespace entlist
 
 			players[i].headpos = *(Vec3*)(bonearray + 6 * 32);
 
+			//int ping = controller[i].GetPing();
+			//std::cout << "\n\nTEST:::: PING:::: " << ping;
 			
 			//Vec3 headPosition = pawn[i].GetBonePos(6);
 			//std::cout << "\nGotNewHead";

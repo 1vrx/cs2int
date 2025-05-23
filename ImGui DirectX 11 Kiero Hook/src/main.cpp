@@ -113,8 +113,6 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 
 	cheat();
 	
-	uintptr_t controller = *(uintptr_t*)(globals::modBase + o::client::dwLocalPlayerController);
-	std::string name = *(std::string*)(controller + o::CCSPlayerController::m_sSanitizedPlayerName);
 
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
@@ -184,19 +182,21 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 	}
 	*/
 
-	ImGui::Begin("jaipurhook");
+	if (toggle::menu)
+	{
+		ImGui::Begin("jaipurhook");
 
 
-	ImGui::NewLine();
+		ImGui::NewLine();
 
-	
+
 		ImGui::TextColored(ImColor(255, 255, 255), "aim:");
 		ImGui::Checkbox("aimbot", &toggle::aimbot);
 		ImGui::Checkbox("mouse_aimbot", &toggle::maimbot);
 		ImGui::SliderFloat("smoothing", &cheatsetting::aimSmooth, 0.1f, 100.f);
 		ImGui::SliderFloat("fov", &cheatsetting::aimfov, 0.1f, 180.f);
 		ImGui::SliderFloat("max distance to aim", &cheatsetting::aimDist, 10.f, 5000.f);
-	
+
 		ImGui::TextColored(ImColor(255, 255, 255), "visual:");
 		ImGui::Checkbox("boneESP", &toggle::skeleton);
 		ImGui::SliderInt("r_bone", &color::r_bone, 0, 255);
@@ -209,7 +209,7 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 		ImGui::Checkbox("nameESP", &toggle::nameESP);
 		ImGui::SliderFloat("width", &cheatsetting::fwidth, 0.f, 100.f);
 		ImGui::SliderFloat("height", &cheatsetting::fheight, 0.f, 100.f);
-	
+
 		ImGui::TextColored(ImColor(255, 255, 255), "misc");
 		ImGui::Checkbox("watermark", &toggle::watermark);
 		ImGui::NewLine();
@@ -219,10 +219,10 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 		ImGui::TextColored(ImColor(255, 255, 255), "extra:");
 		ImGui::Text("source: https://github.com/1vrx/cs2int");
 
-	
 
-	ImGui::End();
 
+		ImGui::End();
+	}
 
 	if (toggle::enabled)
 	{
