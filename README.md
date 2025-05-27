@@ -1,4 +1,4 @@
-# __**CS2 Internal Cheat**__   
+# __**CS2 Internal Modification**__   
 
  ## JAiPUR<sup>hook</sup>
 
