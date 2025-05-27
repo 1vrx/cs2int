@@ -24,6 +24,8 @@ namespace toggle
 
 	bool newentlist = false;
 	bool watermark = false;
+
+	bool indicators = false;
 	
 	
 }

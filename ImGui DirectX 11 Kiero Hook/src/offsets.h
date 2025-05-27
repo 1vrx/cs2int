@@ -24,6 +24,13 @@ namespace o
 		constexpr int m_hPlayerPawn		= 0x824;
 		constexpr int m_bLeftHanded		= 0x22C1;
 		constexpr int m_pGlowServices	= 0x1530;
+		constexpr int m_ArmorValue		= 0x241C;
+
+		//flags
+		constexpr int m_bIsScoped		= 0x23E8;
+		constexpr int m_bIsDefusing = 0x23EA;
+		
+		constexpr int m_pViewModelServices = 0x1368;
 	}
 	namespace CCSPlayerController
 	{

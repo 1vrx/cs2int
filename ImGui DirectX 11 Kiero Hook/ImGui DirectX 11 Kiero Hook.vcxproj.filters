@@ -81,6 +81,9 @@
     <ClCompile Include="src\cheat\sdk\CEntity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\cheat\visuals\world\misc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ext\kiero\minhook\dll_resources\MinHook.rc">
@@ -170,6 +173,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\cheat\sdk\CEntity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\cheat\visuals\world\misc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

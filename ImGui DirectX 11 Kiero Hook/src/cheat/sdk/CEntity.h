@@ -30,26 +30,31 @@ private:
 
 public:
 	
+	//sets address of the pawns base
 	void SetBase(uintptr_t input)
 	{
 		base = input;
 	}
 
+	//int pawnHealth
 	int GetHealth() const
 	{
 		return *(int*)(base + o::C_CSPlayerPawn::m_iHealth);
 	}
 
+	//bool 1 = left, 0 = right
 	bool GetHandedness() const
 	{
 		return *(bool*)(base + o::C_CSPlayerPawn::m_bLeftHanded);
 	}
 
+	//float shouldGlow
 	void Glow(float val)
 	{
 		*(float*)(base + o::C_CSPlayerPawn::m_pGlowServices) = val; // 100000.f = on			0.f = off
 	}
 
+	//Vec3 bonePosition
 	Vec3 GetBonePos(unsigned int bone)
 	{
 		uintptr_t gamescene = *(uintptr_t*)(base + 0x328);
@@ -59,6 +64,7 @@ public:
 		return *(Vec3*)(bonearray + bone * 32);
 	}
 
+	//Vec3 pawnOrigin
 	Vec3 GetOrigin()
 	{
 		return *(Vec3*)(base + o::C_CSPlayerPawn::m_vOrigin);

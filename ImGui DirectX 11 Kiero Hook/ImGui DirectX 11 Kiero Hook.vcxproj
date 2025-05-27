@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\cheat\visuals\world\misc.cpp" />
     <ClCompile Include="src\cheat\sdk\CEntity.cpp" />
     <ClCompile Include="src\cheat\visuals\world\aspectfov.cpp" />
     <ClCompile Include="src\cheat\aim\aim.cpp" />
@@ -173,6 +174,7 @@
     <ResourceCompile Include="ext\kiero\minhook\dll_resources\MinHook.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\cheat\visuals\world\misc.h" />
     <ClInclude Include="src\cheat\sdk\CEntity.h" />
     <ClInclude Include="src\cheat\visuals\world\aspectfov.h" />
     <ClInclude Include="ext\font.h" />

@@ -46,7 +46,7 @@ namespace visual
 			float height = (screenfeet.y - screenhead.y) * 1.5f;
 			float width = height / 2.f;
 			float x = screenfeet.x - width / 2;
-			ImGui::GetBackgroundDrawList()->AddRect({ screenfeet.x - width, screenhead.y - 10.f}, { (screenfeet.x - width / 2) + width, screenhead.y + height }, ImColor(255, 255, 255));
+			ImGui::GetBackgroundDrawList()->AddRect({ screenfeet.x - width, screenhead.y}, { (screenfeet.x - width / 2) + width, screenhead.y + height }, ImColor(255, 255, 255));
 			
 			std::cout << "\nboxesp_drawn";
 			
@@ -67,7 +67,11 @@ namespace visual
 
 			std::string playername;
 
+			
+
 			playername = entlist::controller[i].GetName();
+			if (playername == "")
+				break;
 
 
 			

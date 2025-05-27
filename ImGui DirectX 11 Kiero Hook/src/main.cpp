@@ -8,6 +8,7 @@
 #include "cheat/aim/aim.h"
 #include "cheat/visuals//visuals.h"
 #include "../ext/font.h"
+#include "cheat/visuals/world/misc.h"	
 
 
 
@@ -24,7 +25,7 @@ ID3D11DeviceContext* pContext = NULL;
 ID3D11RenderTargetView* mainRenderTargetView;
 
 
-
+//gotta get rid of this soon
 void cheat()
 {
 	//system("cls");
@@ -69,10 +70,12 @@ void InitImGui()
 	ImGui_ImplWin32_Init(window);
 	ImGui_ImplDX11_Init(pDevice, pContext);
 	
+	/*
 	ImFontConfig font;
 	font.FontDataOwnedByAtlas = false;
 
 	io.Fonts->AddFontFromMemoryTTF((void*)frank_goth, sizeof(frank_goth), 18, &font);
+	*/
 }
 
 LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
@@ -121,7 +124,14 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 	
 	if (toggle::menu)
 	{
-		ImGui::Begin("jaipurhook");
+		ImGui::Begin("jaipurhook", 0, ImGuiWindowFlags_NoTitleBar);
+		ImGui::SetNextWindowBgAlpha(1.f);
+		ImGui::GetStyle().WindowRounding = 0.0f;
+		ImGui::GetStyle().ChildRounding = 0.0f;
+		ImGui::GetStyle().FrameRounding = 0.0f;
+		ImGui::GetStyle().GrabRounding = 0.0f;
+		ImGui::GetStyle().PopupRounding = 0.0f;
+		ImGui::GetStyle().ScrollbarRounding = 0.0f;
 
 		{ ImGui::SameLine(); 
 		if (ImGui::Button(("aim"), ImVec2(150, 30)))
@@ -143,7 +153,7 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 
 		if (menu::tab == 0)
 		{
-			ImGui::TextColored(ImColor(255, 255, 255), "aim:");
+			ImGui::Separator();
 			ImGui::Checkbox("aimbot", &toggle::aimbot);
 			ImGui::Checkbox("mouse_aimbot", &toggle::maimbot);
 			ImGui::SliderFloat("smoothing", &cheatsetting::aimSmooth, 0.1f, 100.f);
@@ -153,7 +163,7 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 		}
 		if (menu::tab == 1)
 		{
-			ImGui::TextColored(ImColor(255, 255, 255), "visual:");
+			ImGui::Separator();
 			ImGui::Checkbox("boneESP", &toggle::skeleton);
 			ImGui::SliderInt("r_bone", &color::r_bone, 0, 255);
 			ImGui::SliderInt("g_bone", &color::g_bone, 0, 255);
@@ -165,16 +175,17 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 			ImGui::Checkbox("nameESP", &toggle::nameESP);
 			ImGui::SliderFloat("width", &cheatsetting::fwidth, 0.f, 100.f);
 			ImGui::SliderFloat("height", &cheatsetting::fheight, 0.f, 100.f);
+			ImGui::Checkbox("indicators [beta]", &toggle::indicators);
 			ImGui::End();
 		}
 		if (menu::tab == 2)
 		{
 			
-			ImGui::TextColored(ImColor(255, 255, 255), "misc");
+			ImGui::Separator();
 			ImGui::Checkbox("watermark", &toggle::watermark);
 			ImGui::NewLine();
 			ImGui::NewLine();
-			ImGui::Checkbox("test", &toggle::newentlist);
+			ImGui::Checkbox("oldlits", &toggle::newentlist);
 
 			ImGui::TextColored(ImColor(255, 255, 255), "extra:");
 			ImGui::Text("source: https://github.com/1vrx/cs2int");
@@ -185,49 +196,7 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 		
 	}
 	
-	/*
-	if (toggle::menu)
-	{
-		ImGui::Begin("jaipurhook");
-
-
-		ImGui::NewLine();
-
-
-		ImGui::TextColored(ImColor(255, 255, 255), "aim:");
-		ImGui::Checkbox("aimbot", &toggle::aimbot);
-		ImGui::Checkbox("mouse_aimbot", &toggle::maimbot);
-		ImGui::SliderFloat("smoothing", &cheatsetting::aimSmooth, 0.1f, 100.f);
-		ImGui::SliderFloat("fov", &cheatsetting::aimfov, 0.1f, 180.f);
-		ImGui::SliderFloat("max distance to aim", &cheatsetting::aimDist, 10.f, 5000.f);
-
-		ImGui::TextColored(ImColor(255, 255, 255), "visual:");
-		ImGui::Checkbox("boneESP", &toggle::skeleton);
-		ImGui::SliderInt("r_bone", &color::r_bone, 0, 255);
-		ImGui::SliderInt("g_bone", &color::g_bone, 0, 255);
-		ImGui::SliderInt("b_bone", &color::b_bone, 0, 255);
-		ImGui::SliderFloat("bone_thickness", &cheatsetting::bone_thickness, 1.f, 25.f);
-		ImGui::Checkbox("tracers", &toggle::tracers);
-		ImGui::Checkbox("healthESP", &toggle::healthESP);
-		ImGui::Checkbox("boxESP", &toggle::esp);
-		ImGui::Checkbox("nameESP", &toggle::nameESP);
-		ImGui::SliderFloat("width", &cheatsetting::fwidth, 0.f, 100.f);
-		ImGui::SliderFloat("height", &cheatsetting::fheight, 0.f, 100.f);
-
-		ImGui::TextColored(ImColor(255, 255, 255), "misc");
-		ImGui::Checkbox("watermark", &toggle::watermark);
-		ImGui::NewLine();
-		ImGui::NewLine();
-		ImGui::Checkbox("test", &toggle::newentlist);
-
-		ImGui::TextColored(ImColor(255, 255, 255), "extra:");
-		ImGui::Text("source: https://github.com/1vrx/cs2int");
-
-
-
-		ImGui::End();
-	}
-	*/
+	//toggles
 	if (toggle::enabled)
 	{
 		entlist::Init();
@@ -274,7 +243,10 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 	{
 		visual::NameESP();
 	}
-	
+	if (toggle::indicators && !toggle::menu)
+	{
+		world::Indicators();
+	}
 	
 
 	

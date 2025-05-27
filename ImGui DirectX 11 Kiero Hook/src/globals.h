@@ -29,6 +29,8 @@ namespace toggle
 
 	extern bool newentlist;
 	extern bool watermark;
+
+	extern bool indicators;
 	
 
 

@@ -11,8 +11,8 @@ namespace entlist
 	
 	
 
-	C_CSPlayerPawn pawn[65];
-	CCSPlayerController controller[65];
+	extern C_CSPlayerPawn pawn[65]{};
+	extern CCSPlayerController controller[65]{};
 	
 	// @Note: the UC method is a lot better, tmr fully convert to use it as it actually obtains my Controllers:D
 	void IntIt()
@@ -164,8 +164,8 @@ namespace entlist
 
 			players[i].headpos = *(Vec3*)(bonearray + 6 * 32);
 
-			//int ping = controller[i].GetPing();
-			//std::cout << "\n\nTEST:::: PING:::: " << ping;
+			int ping = controller[i].GetPing();
+			std::cout << "\n\nTEST:::: PING:::: " << ping;
 			
 			//Vec3 headPosition = pawn[i].GetBonePos(6);
 			//std::cout << "\nGotNewHead";
