@@ -31,6 +31,7 @@ namespace toggle
 	extern bool watermark;
 
 	extern bool indicators;
+	extern bool fovchanger;
 	
 
 
@@ -56,6 +57,8 @@ namespace cheatsetting
 	extern float aimfov;
 
 	extern float bone_thickness;
+
+	extern int fov;
 	
 }
 

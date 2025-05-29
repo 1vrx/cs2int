@@ -39,17 +39,18 @@ namespace visual
 			
 			if (!entlist::players[i].pos.W2S(screenfeet, ViewMatrix) && entlist::players[i].headpos.W2S(screenhead, ViewMatrix))
 				continue;
-			
+#ifdef _DEBUG
 			std::cout << "\n[BOX ESP DEBUG] feetpos (screen) = " << screenfeet.x << " / " << screenfeet.y;
 			std::cout << "\n[BOX ESP DEBUG] headpos (screen) = " << screenhead.x << " / " << screenhead.y;
+#endif _DEBUG
 			screenhead.y = screenfeet.y - 67.f;
 			float height = (screenfeet.y - screenhead.y) * 1.5f;
 			float width = height / 2.f;
 			float x = screenfeet.x - width / 2;
 			ImGui::GetBackgroundDrawList()->AddRect({ screenfeet.x - width, screenhead.y}, { (screenfeet.x - width / 2) + width, screenhead.y + height }, ImColor(255, 255, 255));
-			
+#ifdef _DEBUG			
 			std::cout << "\nboxesp_drawn";
-			
+#endif _DEBUG			
 			
 			
 		}
@@ -67,10 +68,11 @@ namespace visual
 
 			std::string playername;
 
+			uint32_t controller = *(uint32_t*)(globals::modBase + o::client::dwLocalPlayerController);
 			
 
-			playername = entlist::controller[i].GetName();
-			if (playername == "")
+			playername = *(std::string*)(controller + o::CCSPlayerController::m_sSanitizedPlayerName);
+			if (playername.empty())
 				break;
 
 
@@ -89,7 +91,9 @@ namespace visual
 			//check if localplayer - entlist::players[i].team can be done for a team check 
 			if (entlist::players[i].pos.x == entlist::players[0].pos.x)
 				continue;
-			if (entlist::players[i].health < 0)
+			if (entlist::players[i].health <= 0)
+				continue;
+			if (entlist::players[i].team == entlist::players[0].team)
 				continue;
 
 			//step through to bone array

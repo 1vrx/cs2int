@@ -26,6 +26,7 @@ namespace toggle
 	bool watermark = false;
 
 	bool indicators = false;
+	bool fovchanger = false;
 	
 	
 }
@@ -50,6 +51,8 @@ namespace cheatsetting
 
 
 	float bone_thickness = 1.f;
+
+	int fov = 60;
 }
 
 namespace color

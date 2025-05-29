@@ -19,6 +19,7 @@ namespace aim
 
 	
 	void mouse_aimbot();
+
 	
 }
 

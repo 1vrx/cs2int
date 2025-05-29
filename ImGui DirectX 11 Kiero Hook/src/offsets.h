@@ -1,5 +1,6 @@
 #pragma once
 #include "globals.h"	
+#include "../ext/patternscan.h"
 
 
 namespace o
@@ -7,7 +8,7 @@ namespace o
 	namespace client
 	{
 		constexpr int dumped_entityList = 0x19FEE38;
-		constexpr int dwLocalPlayer		= 0x18530D0;		//ptr to C_CSPlayerPawn
+		constexpr int dwLocalPlayer		= 0x18530D0;		//ptr to C_CSPlayerPawn 0x3F0
 		constexpr int dwLocalPlayerController = 0x1A4D840;
 		constexpr int dwEntityList		= 0x1860B80;		//localtion of entlist 10bytes between each ent	1858C10 client.dll+1858C10	1859B90
 		constexpr int dwViewAngles		= 0x1A72390;		//this is eye angle, camera is different - silent aim soon  //OLD : 0x1A6A210
@@ -30,12 +31,17 @@ namespace o
 		constexpr int m_bIsScoped		= 0x23E8;
 		constexpr int m_bIsDefusing = 0x23EA;
 		
+		constexpr int m_pCameraServices = 0x11E0;
 		constexpr int m_pViewModelServices = 0x1368;
 	}
 	namespace CCSPlayerController
 	{
 		constexpr int m_iPing			= 0x740;
-		constexpr int m_sSanitizedPlayerName = 0x778;			// @vrx: CE [client.dll + dwLocalPlayerController] + m_sSanitzedPlayerName = YourName //:D gotta do 4 all ents
+		constexpr int m_sSanitizedPlayerName = 0x778;			// @vrx: CE [client.dll + dwLocalPlayerController] + m_sSanitzedPlayerName = YourName //:D gotta do 4 all ents [Crashing]
+	}
+	namespace CameraServices
+	{
+		constexpr int m_iFOV = 0x210;
 	}
 	namespace all
 	{

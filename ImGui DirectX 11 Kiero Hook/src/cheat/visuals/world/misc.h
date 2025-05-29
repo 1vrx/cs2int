@@ -5,5 +5,6 @@
 namespace world
 {
 	void Indicators();
+	void changeFOV();
 }
 

@@ -69,6 +69,12 @@ public:
 	{
 		return *(Vec3*)(base + o::C_CSPlayerPawn::m_vOrigin);
 	}
+
+	int GetTeam()
+	{
+		return *(int*)(base + o::C_CSPlayerPawn::m_iTeamNum);
+	}
+
 };
 
 

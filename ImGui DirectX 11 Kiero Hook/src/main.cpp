@@ -120,7 +120,8 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
-	
+
+	/*		|| want to start adding that sliders only appear if the module is enabled ||		*/
 	
 	if (toggle::menu)
 	{
@@ -158,7 +159,7 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 			ImGui::Checkbox("mouse_aimbot", &toggle::maimbot);
 			ImGui::SliderFloat("smoothing", &cheatsetting::aimSmooth, 0.1f, 100.f);
 			ImGui::SliderFloat("fov", &cheatsetting::aimfov, 0.1f, 180.f);
-			ImGui::SliderFloat("max distance to aim", &cheatsetting::aimDist, 10.f, 5000.f);
+			ImGui::SliderFloat("max distance to aim", &cheatsetting::aimDist, 10.f, 50000.f);
 			ImGui::End();
 		}
 		if (menu::tab == 1)
@@ -173,9 +174,9 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 			ImGui::Checkbox("healthESP", &toggle::healthESP);
 			ImGui::Checkbox("boxESP", &toggle::esp);
 			ImGui::Checkbox("nameESP", &toggle::nameESP);
-			ImGui::SliderFloat("width", &cheatsetting::fwidth, 0.f, 100.f);
-			ImGui::SliderFloat("height", &cheatsetting::fheight, 0.f, 100.f);
 			ImGui::Checkbox("indicators [beta]", &toggle::indicators);
+			ImGui::Checkbox("fov_changer", &toggle::fovchanger);
+			ImGui::SliderInt("fov [beta]", &cheatsetting::fov, 20, 179);
 			ImGui::End();
 		}
 		if (menu::tab == 2)
@@ -185,7 +186,7 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 			ImGui::Checkbox("watermark", &toggle::watermark);
 			ImGui::NewLine();
 			ImGui::NewLine();
-			ImGui::Checkbox("oldlits", &toggle::newentlist);
+			ImGui::Checkbox("new_entlist", &toggle::newentlist);
 
 			ImGui::TextColored(ImColor(255, 255, 255), "extra:");
 			ImGui::Text("source: https://github.com/1vrx/cs2int");
@@ -203,6 +204,7 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 	}
 	if (toggle::aimbot)
 	{
+		std::cout << "\naimbot enabled";
 		if (GetAsyncKeyState(VK_RBUTTON))
 			aim::Aimbot();
 	}
@@ -236,8 +238,8 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 	}
 	if (toggle::watermark)
 	{
-		ImGui::GetBackgroundDrawList()->AddText({ 29, 21 }, ImColor(0, 0, 0), "JAiPURhook");			//shadow
-		ImGui::GetBackgroundDrawList()->AddText({ 30, 20 }, ImColor(255, 255, 255), "JAiPURhook");		//main text
+		ImGui::GetBackgroundDrawList()->AddText({ 29, 21 }, ImColor(0, 0, 0), "module");			//shadow
+		ImGui::GetBackgroundDrawList()->AddText({ 30, 20 }, ImColor(255, 255, 255), "module");		//main text
 	}
 	if (toggle::nameESP)
 	{
@@ -247,7 +249,11 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 	{
 		world::Indicators();
 	}
-	
+	if (toggle::fovchanger)
+	{
+		world::changeFOV();
+	}
+
 
 	
 
@@ -276,6 +282,11 @@ DWORD WINAPI MainThread(LPVOID lpReserved)
 	std::cout << "[ :: ] cheat loaded\n" <<
 		"[ :: ] located base 0x" << std::hex << globals::modBase << "\nPress F1 to initialize the entity list [required for cheat to work]" << 
 		"\n[ + ] NameESP (dont use in single player)\n[ + ] Added BoneESP customization\n[ - ] Broke Aimbot\n[ * ] Ready to start adding tabs to menu";
+
+
+	PVOID scannedController = reinterpret_cast<PVOID>(FindPattern(L"client.dll", "48 8B 05 ?? ?? ?? ?? 48 85 C0 74 4F"));
+
+	std::cout << "\n\nController [hard] " << o::client::dwLocalPlayerController << "\nController [pattern] " << scannedController;
 
 	bool init_hook = false;
 	do
