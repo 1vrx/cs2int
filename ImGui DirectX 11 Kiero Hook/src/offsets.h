@@ -7,12 +7,12 @@ namespace o
 {
 	namespace client
 	{
-		constexpr int dumped_entityList = 0x19FEE38;
-		constexpr int dwLocalPlayer		= 0x18530D0;		//ptr to C_CSPlayerPawn 0x3F0
-		constexpr int dwLocalPlayerController = 0x1A4D840;
-		constexpr int dwEntityList		= 0x1860B80;		//localtion of entlist 10bytes between each ent	1858C10 client.dll+1858C10	1859B90
-		constexpr int dwViewAngles		= 0x1A72390;		//this is eye angle, camera is different - silent aim soon  //OLD : 0x1A6A210
-		constexpr int dwViewMatrix		= 0x1A67FA0;		//float[4][4]		0x1A89070
+		constexpr int dumped_entityList = 0x19FFE48;
+		constexpr int dwLocalPlayer		= 0x18540D0;		//ptr to C_CSPlayerPawn 0x3F0
+		constexpr int dwLocalPlayerController = 0x1A4E870;
+		constexpr int dwEntityList		= 0x1861B80;		//localtion of entlist 10bytes between each ent	1858C10 client.dll+1858C10	1859B90
+		constexpr int dwViewAngles		= 0x1A733C0;		//this is eye angle, camera is different - silent aim soon  //OLD : 0x1A6A210
+		constexpr int dwViewMatrix		= 0x1A68FD0;		//float[4][4]		0x1A89070
 	}
 	namespace C_CSPlayerPawn		//Parent: C_BasePlayerPawn 
 	{
