@@ -27,6 +27,8 @@ namespace toggle
 
 	bool indicators = false;
 	bool fovchanger = false;
+
+	bool hooks = false;
 	
 	
 }

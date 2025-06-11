@@ -9,6 +9,7 @@
 #include "cheat/visuals//visuals.h"
 #include "../ext/font.h"
 #include "cheat/visuals/world/misc.h"	
+#include "cheat/sdk/hooks.h"
 
 
 
@@ -187,6 +188,7 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 			ImGui::NewLine();
 			ImGui::NewLine();
 			ImGui::Checkbox("new_entlist", &toggle::newentlist);
+			ImGui::Checkbox("hooks", &toggle::hooks);
 
 			ImGui::TextColored(ImColor(255, 255, 255), "extra:");
 			ImGui::Text("source: https://github.com/1vrx/cs2int");
@@ -253,6 +255,10 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 	{
 		world::changeFOV();
 	}
+	if (toggle::hooks)
+	{
+		hook::init();
+	}
 
 
 	
@@ -281,12 +287,12 @@ DWORD WINAPI MainThread(LPVOID lpReserved)
 
 	std::cout << "[ :: ] cheat loaded\n" <<
 		"[ :: ] located base 0x" << std::hex << globals::modBase << "\nPress F1 to initialize the entity list [required for cheat to work]" << 
-		"\n[ + ] NameESP (dont use in single player)\n[ + ] Added BoneESP customization\n[ - ] Broke Aimbot\n[ * ] Ready to start adding tabs to menu";
+		"\n[+] hooks testing" << std::dec;
 
 
-	PVOID scannedController = reinterpret_cast<PVOID>(FindPattern(L"client.dll", "48 8B 05 ?? ?? ?? ?? 48 85 C0 74 4F"));
+	//uintptr_t scannedController = PatternScan<uintptr_t>("client.dll", "48 8B 05 ?? ?? ?? ?? 48 85 C0 74 4F");
 
-	std::cout << "\n\nController [hard] " << o::client::dwLocalPlayerController << "\nController [pattern] " << scannedController;
+	//std::cout << "\n\nController [hard] " << o::client::dwLocalPlayerController << "\nController [pattern] " << scannedController;
 
 	bool init_hook = false;
 	do
