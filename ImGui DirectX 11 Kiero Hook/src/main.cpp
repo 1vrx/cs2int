@@ -290,9 +290,7 @@ DWORD WINAPI MainThread(LPVOID lpReserved)
 		"\n[+] hooks testing" << std::dec;
 
 
-	//uintptr_t scannedController = PatternScan<uintptr_t>("client.dll", "48 8B 05 ?? ?? ?? ?? 48 85 C0 74 4F");
-
-	//std::cout << "\n\nController [hard] " << o::client::dwLocalPlayerController << "\nController [pattern] " << scannedController;
+	
 
 	bool init_hook = false;
 	do
@@ -303,7 +301,9 @@ DWORD WINAPI MainThread(LPVOID lpReserved)
 			init_hook = true;
 		}
 	} while (!init_hook);
+	
 	return TRUE;
+
 }
 
 BOOL WINAPI DllMain(HMODULE hMod, DWORD dwReason, LPVOID lpReserved)
