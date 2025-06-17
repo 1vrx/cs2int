@@ -3,6 +3,7 @@
 #include "../../offsets.h"
 #include "../../../ext/kiero/minhook/include/MinHook.h"
 #include "../../src/includes.h"
+#include "../skins/skinchanger.h"
 
 #include <Windows.h>
 #include <vector>
@@ -18,6 +19,8 @@
 #include <functional>
 #include <string>
 
+std::vector<std::pair<uint8_t, bool>> PatternToBytes(const std::string& pattern);
+uintptr_t patternScan(const std::string& module, const std::string& pattern);
 
 namespace hook
 {
@@ -28,6 +31,10 @@ namespace hook
 
 	void __fastcall hkCreateMove(int* a1, int a2, char a3);
 
+	typedef void(__fastcall* oFSN)(void*, int);
+	inline oFSN oFrameStageNotify = nullptr;
+
+	void __fastcall hkFrameStageNotify(void* a1, int stage);
 
 	void init();
 	

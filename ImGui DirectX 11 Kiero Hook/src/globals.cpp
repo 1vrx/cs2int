@@ -29,6 +29,8 @@ namespace toggle
 	bool fovchanger = false;
 
 	bool hooks = false;
+
+	bool skinchanger = false;
 	
 	
 }
@@ -55,6 +57,8 @@ namespace cheatsetting
 	float bone_thickness = 1.f;
 
 	int fov = 60;
+
+	int akID = 180;
 }
 
 namespace color

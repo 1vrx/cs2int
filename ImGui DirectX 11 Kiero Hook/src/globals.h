@@ -35,6 +35,8 @@ namespace toggle
 	
 	extern bool hooks;
 
+	extern bool skinchanger;
+
 
 }
 
@@ -60,6 +62,8 @@ namespace cheatsetting
 	extern float bone_thickness;
 
 	extern int fov;
+
+	extern int akID;
 	
 }
 

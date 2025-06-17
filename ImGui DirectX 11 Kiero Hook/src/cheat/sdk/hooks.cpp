@@ -126,10 +126,22 @@ namespace hook
 	{
 		{
 			std::cout << "\nInCreateMove a1: " << a1;
+			std::cout << "\n\npattern | hardcode\n" << std::hex << o::client::dwLocalPlayer << " | " << patternScan("client.dll", "66 0F 7F 05 ? ? ? ? C7 05 ? ? ? ? ? ? ? ? C6 05 ? ? ? ? ? 0F 11 05");
 
 			oCreateMove(a1, a2, a3);
 		}
 	}
+
+	void __fastcall hkFrameStageNotify(void* a1, int stage)
+	{
+		std::cout << "\n[FrameStageNotify] stage " << stage;
+		if (stage == 5 || stage == 6)
+		{
+			dotheskinchangershit();
+		}
+	}
+
+
 
 	void init()
 	{
@@ -144,9 +156,18 @@ namespace hook
 			if (!o_cm)
 				return;
 
-			
+			auto fsnpat = patternScan("client.dll", "48 89 5C 24 ? 56 48 83 EC 30 8B 05 ? ? ? ?");
+			if (!fsnpat)
+			{
+				std::cout << "\nFailed to find FrameStageNotify";
+				return;
+			}
+
+
+			MH_CreateHook((LPVOID)fsnpat, (LPVOID)hkFrameStageNotify, (LPVOID*)&oFrameStageNotify);
 			MH_CreateHook((LPVOID)o_cm, (LPVOID)hkCreateMove, (LPVOID*)&oCreateMove);
 			MH_EnableHook((LPVOID)o_cm);
+			MH_EnableHook((LPVOID)fsnpat);
 
 			
 			std::cout << "\nEnabledHook";

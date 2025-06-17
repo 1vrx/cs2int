@@ -150,6 +150,7 @@
   <ItemGroup>
     <ClCompile Include="ext\patternscan.cpp" />
     <ClCompile Include="src\cheat\sdk\hooks.cpp" />
+    <ClCompile Include="src\cheat\skins\skinchanger.cpp" />
     <ClCompile Include="src\cheat\visuals\world\misc.cpp" />
     <ClCompile Include="src\cheat\sdk\CEntity.cpp" />
     <ClCompile Include="src\cheat\visuals\world\aspectfov.cpp" />
@@ -180,6 +181,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\cheat\sdk\hooks.h" />
+    <ClInclude Include="src\cheat\skins\skinchanger.h" />
     <ClInclude Include="src\cheat\visuals\world\misc.h" />
     <ClInclude Include="src\cheat\sdk\CEntity.h" />
     <ClInclude Include="src\cheat\visuals\world\aspectfov.h" />

@@ -1,6 +1,6 @@
 #pragma once
 #include "globals.h"	
-#include "../ext/patternscan.h"
+//#include "../ext/patternscan.h"
 
 
 namespace o

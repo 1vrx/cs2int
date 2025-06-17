@@ -10,6 +10,7 @@
 #include "../ext/font.h"
 #include "cheat/visuals/world/misc.h"	
 #include "cheat/sdk/hooks.h"
+#include "cheat/skins/skinchanger.h"
 
 
 
@@ -189,7 +190,8 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 			ImGui::NewLine();
 			ImGui::Checkbox("new_entlist", &toggle::newentlist);
 			ImGui::Checkbox("hooks", &toggle::hooks);
-
+			ImGui::Checkbox("SkinChanger", &toggle::skinchanger);
+			ImGui::SliderInt("AK ID", &cheatsetting::akID, 0, 1000);
 			ImGui::TextColored(ImColor(255, 255, 255), "extra:");
 			ImGui::Text("source: https://github.com/1vrx/cs2int");
 			ImGui::End();
@@ -259,6 +261,18 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 	{
 		hook::init();
 	}
+	if (toggle::skinchanger)
+	{
+		if (!toggle::hooks) {
+			hook::init();
+			
+		}
+		if (toggle::hooks) {
+			//hook::init();
+			//need a better way to handle  -  I will make each hook its own thing, or maybe add a hook to the whole skinchanger func
+		}
+		
+	}
 
 
 	
@@ -288,6 +302,7 @@ DWORD WINAPI MainThread(LPVOID lpReserved)
 	std::cout << "[ :: ] cheat loaded\n" <<
 		"[ :: ] located base 0x" << std::hex << globals::modBase << "\nPress F1 to initialize the entity list [required for cheat to work]" << 
 		"\n[+] hooks testing" << std::dec;
+	//std::cout << std::hex << "\n\nPatterns: \nHardcoded = 0x" << o::client::dwLocalPlayer << "\nPattern = 0x" << o::client::dwLocalPlayerPattern;
 
 
 	
