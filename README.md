@@ -23,7 +23,11 @@ add flags [  defusing, helmet_kevlar, scoped etc  ]
 
 current look:  
 
-![image](https://github.com/user-attachments/assets/b6826ef2-469b-4885-9fc0-6522d66d2abe)
+![image](https://github.com/user-attachments/assets/b6826ef2-469b-4885-9fc0-6522d66d2abe)   
+
+skinchanger [adding soon]:  
+![image](https://github.com/user-attachments/assets/ff2eb499-a05a-43de-8f02-233824154312)
+
 
 
 
