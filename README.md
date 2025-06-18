@@ -2,6 +2,7 @@
 
  ## JAiPUR<sup>hook</sup>
 
+https://discord.gg/8VfMb6jWea  <- join for help or suggestions. 
 
 *HAS*    
   
