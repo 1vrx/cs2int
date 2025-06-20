@@ -2,6 +2,7 @@
 
  ## JAiPUR<sup>hook</sup>
 
+https://discord.gg/8VfMb6jWea  <- join for help or suggestions. 
 
 *HAS*    
   
@@ -12,11 +13,9 @@ ESP + Options
 
        
 *todo*:  
-turn the array into a vector for optimization  
-Add more aimsettings [  fix the smoothing math  ]    
-recode the esp [  box and health are broken + include new ent list  ]  
-add flags [  defusing, helmet_kevlar, scoped etc  ]    
-
+fix esp box still  
+fix skinchanger  
+add esp flags
 
 
 
