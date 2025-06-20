@@ -31,28 +31,21 @@ namespace visual
 
 	void PlayerESP()
 	{
-		for (int i = 0; i <= entlist::entcount; i++)
+		for (int i = 1; i <= entlist::entcount; i++)
 		{
+			auto& player = entlist::players[i];
 
-			if (entlist::players[i].pos.x == entlist::players[0].pos.x)
+			Vec2 feet, head;
+			if (!player.pos.W2S(feet, ViewMatrix) || !player.headpos.W2S(head, ViewMatrix))
 				continue;
-			
-			if (!entlist::players[i].pos.W2S(screenfeet, ViewMatrix) && entlist::players[i].headpos.W2S(screenhead, ViewMatrix))
-				continue;
-#ifdef _DEBUG
-			std::cout << "\n[BOX ESP DEBUG] feetpos (screen) = " << screenfeet.x << " / " << screenfeet.y;
-			std::cout << "\n[BOX ESP DEBUG] headpos (screen) = " << screenhead.x << " / " << screenhead.y;
-#endif _DEBUG
-			screenhead.y = screenfeet.y - 67.f;
-			float height = (screenfeet.y - screenhead.y) * 1.5f;
-			float width = height / 2.f;
-			float x = screenfeet.x - width / 2;
-			ImGui::GetBackgroundDrawList()->AddRect({ screenfeet.x - width, screenhead.y}, { (screenfeet.x - width / 2) + width, screenhead.y + height }, ImColor(255, 255, 255));
-#ifdef _DEBUG			
-			std::cout << "\nboxesp_drawn";
-#endif _DEBUG			
-			
-			
+
+			float height = feet.y - head.y;
+			float width = height / 2.0f;
+
+			ImVec2 topLeft = { head.x - width / 2.0f, head.y - 5 };
+			ImVec2 bottomRight = { head.x + width / 2.0f, feet.y };
+
+			ImGui::GetBackgroundDrawList()->AddRect(topLeft, bottomRight, ImColor(255, 255, 255));
 		}
 	}
 
