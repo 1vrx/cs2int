@@ -173,6 +173,7 @@ namespace visual
 		
 			
 				ImGui::GetBackgroundDrawList()->AddLine(device::midTop, {screenhead.x, screenhead.y}, ImColor(255, 255, 255));
+				
 			
 
 			
@@ -182,27 +183,29 @@ namespace visual
 
 	void HealthESP()
 	{
-		for (int i = 0; i <= entlist::entcount; i++)
+		for (int i = 1; i <= entlist::entcount; i++)
 		{
-			if (!entlist::players[i].headpos.W2S(screenhead, ViewMatrix))
+			auto& player = entlist::players[i];
+
+			Vec2 feet, head;
+			//player.headpos.y + 5.f;
+			if (!player.pos.W2S(feet, ViewMatrix) || !player.headpos.W2S(head, ViewMatrix))
 				continue;
-			//if not local player, render
-			if (entlist::players[i].pos.x == entlist::players[0].pos.x)
-				continue;
+
+			float height = feet.y - head.y;
+			float width = height / 2.0f;
+
+			int& hp = player.health;
+
+			float pc_hp = hp / 100;
+			head.y = head.y * pc_hp;
 
 
+			ImVec2 topLeft = { head.x - width / 2.0f, head.y };
+			ImVec2 bottomRight = { head.x + (width / 100) / 2.0f, feet.y };
 
-
-
-			entlist::players[i].headpos.W2S(screenhead, ViewMatrix);
-			entlist::players[i].pos.W2S(screenfeet, ViewMatrix);
-			int enthp = entlist::pawn[i].GetHealth();
-
-			
-
-
-			//ImGui::GetBackgroundDrawList()->AddRectFilled({/*min X and Y VAL*/ });
-
+			ImGui::GetBackgroundDrawList()->AddRectFilled(topLeft, bottomRight, ImColor(0, 255, 0));
+			//ImGui::GetBackgroundDrawList()->AddRect(topLeft, bottomRight, ImColor(255, 255, 255));
 		}
 	}
 	void Glow(bool val)

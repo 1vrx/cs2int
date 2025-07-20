@@ -12,6 +12,9 @@ namespace globals
 
 	template <typename T>
 	uintptr_t relativeaddr(T addr);
+
+	//const float screenx = ImGui::GetIO().DisplaySize.x;
+	//const float screeny = ImGui::GetIO().DisplaySize.y;
 }
 
 namespace toggle

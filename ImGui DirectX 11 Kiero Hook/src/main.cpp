@@ -96,14 +96,14 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 {
 	if (!init)
 	{
-		if (SUCCEEDED(pSwapChain->GetDevice(__uuidof(ID3D11Device), (void**)& pDevice)))
+		if (SUCCEEDED(pSwapChain->GetDevice(__uuidof(ID3D11Device), (void**)&pDevice)))
 		{
 			pDevice->GetImmediateContext(&pContext);
 			DXGI_SWAP_CHAIN_DESC sd;
 			pSwapChain->GetDesc(&sd);
 			window = sd.OutputWindow;
 			ID3D11Texture2D* pBackBuffer;
-			pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)& pBackBuffer);
+			pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pBackBuffer);
 			pDevice->CreateRenderTargetView(pBackBuffer, NULL, &mainRenderTargetView);
 			pBackBuffer->Release();
 			oWndProc = (WNDPROC)SetWindowLongPtr(window, GWLP_WNDPROC, (LONG_PTR)WndProc);
@@ -114,17 +114,17 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 		else
 			return oPresent(pSwapChain, SyncInterval, Flags);
 	}
-	
+
 
 	cheat();
-	
+
 
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 
 	/*		|| want to start adding that sliders only appear if the module is enabled ||		*/
-	
+
 	if (toggle::menu)
 	{
 		ImGui::Begin("jaipurhook", 0, ImGuiWindowFlags_NoTitleBar);
@@ -136,21 +136,22 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 		ImGui::GetStyle().PopupRounding = 0.0f;
 		ImGui::GetStyle().ScrollbarRounding = 0.0f;
 
-		{ ImGui::SameLine(); 
-		if (ImGui::Button(("aim"), ImVec2(150, 30)))
 		{
-			menu::tab = 0;
-		}
-		ImGui::SameLine();
-		if (ImGui::Button(("visual"), ImVec2(150, 30)))
-		{
-			menu::tab = 1;
-		}
-		ImGui::SameLine();
-		if (ImGui::Button(("misc"), ImVec2(150, 30)))
-		{
-			menu::tab = 2;
-		}
+			ImGui::SameLine();
+			if (ImGui::Button(("aim"), ImVec2(150, 30)))
+			{
+				menu::tab = 0;
+			}
+			ImGui::SameLine();
+			if (ImGui::Button(("visual"), ImVec2(150, 30)))
+			{
+				menu::tab = 1;
+			}
+			ImGui::SameLine();
+			if (ImGui::Button(("misc"), ImVec2(150, 30)))
+			{
+				menu::tab = 2;
+			}
 		}
 		ImGui::NewLine();
 
@@ -183,7 +184,7 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 		}
 		if (menu::tab == 2)
 		{
-			
+
 			ImGui::Separator();
 			ImGui::Checkbox("watermark", &toggle::watermark);
 			ImGui::NewLine();
@@ -195,15 +196,16 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 			ImGui::TextColored(ImColor(255, 255, 255), "extra:");
 			ImGui::Text("source: https://github.com/1vrx/cs2int");
 			ImGui::End();
-			
+
 		}
-		
-		
+
+
 	}
-	
+
 	//toggles
 	if (toggle::enabled)
 	{
+		//i want to change this from being "press f1" and into a "if x is enabled = entlist::init()"
 		entlist::Init();
 	}
 	if (toggle::aimbot)
@@ -212,7 +214,7 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 		if (GetAsyncKeyState(VK_RBUTTON))
 			aim::Aimbot();
 	}
-	
+
 	if (toggle::maimbot)
 	{
 		ImGui::GetBackgroundDrawList()->AddCircle({ 960, 540 }, cheatsetting::aimfov / 2, ImColor(255, 255, 255));
