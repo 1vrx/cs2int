@@ -93,6 +93,9 @@
     <ClCompile Include="src\cheat\skins\skinchanger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\cheat\sdk\util.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ext\kiero\minhook\dll_resources\MinHook.rc">
@@ -191,6 +194,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\cheat\skins\skinchanger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\cheat\sdk\util.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

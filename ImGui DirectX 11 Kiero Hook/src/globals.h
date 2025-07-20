@@ -4,9 +4,11 @@
 #include "math/mymath.h"
 #include "offsets.h"
 
+
 namespace globals
 {
 	const uintptr_t modBase = (uintptr_t)GetModuleHandleW(L"client.dll");
+	const uintptr_t engine = (uintptr_t)GetModuleHandleW(L"engine2.dll");
 	//const uintptr_t* LocalPlayer = (uintptr_t*)(modBase + o::client::dwLocalPlayer);	//currently causing LNK2005 issue... 
 	//const Vec3 dwViewAngles = *(Vec3*)(modBase + );
 
@@ -15,6 +17,8 @@ namespace globals
 
 	//const float screenx = ImGui::GetIO().DisplaySize.x;
 	//const float screeny = ImGui::GetIO().DisplaySize.y;
+
+	extern bool ingame;
 }
 
 namespace toggle
@@ -39,6 +43,8 @@ namespace toggle
 	extern bool hooks;
 
 	extern bool skinchanger;
+
+	extern bool ingame;
 
 
 }

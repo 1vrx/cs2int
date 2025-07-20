@@ -11,7 +11,7 @@
 #include "cheat/visuals/world/misc.h"	
 #include "cheat/sdk/hooks.h"
 #include "cheat/skins/skinchanger.h"
-
+#include "cheat/sdk/util.h"
 
 
 
@@ -187,6 +187,7 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 
 			ImGui::Separator();
 			ImGui::Checkbox("watermark", &toggle::watermark);
+			ImGui::Checkbox("ingamecheck", &toggle::ingame);
 			ImGui::NewLine();
 			ImGui::NewLine();
 			ImGui::Checkbox("new_entlist", &toggle::newentlist);
@@ -203,10 +204,36 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 	}
 
 	//toggles
+
+	if (toggle::ingame)
+	{
+		globals::ingame = util::ingame();
+	}
+
+	/*
 	if (toggle::enabled)
 	{
 		//i want to change this from being "press f1" and into a "if x is enabled = entlist::init()"
+		if (globals::ingame)
+		{
+			entlist::Init();
+		}
+		else
+		{
+			std::cout << "\ncurrently not in game";
+		}
+		
+	}
+	
+	*/
+
+	if (globals::ingame)
+	{
 		entlist::Init();
+	}
+	else
+	{
+		std::cout << "\ncurrently not in game";
 	}
 	if (toggle::aimbot)
 	{
@@ -301,9 +328,7 @@ DWORD WINAPI MainThread(LPVOID lpReserved)
 	SetConsoleTitle("debug window");
 
 
-	std::cout << "[ :: ] cheat loaded\n" <<
-		"[ :: ] located base 0x" << std::hex << globals::modBase << "\nPress F1 to initialize the entity list [required for cheat to work]" << 
-		"\n[+] hooks testing" << std::dec;
+	std::cout << "[ :: ] cheat loaded\n";
 	//std::cout << std::hex << "\n\nPatterns: \nHardcoded = 0x" << o::client::dwLocalPlayer << "\nPattern = 0x" << o::client::dwLocalPlayerPattern;
 
 

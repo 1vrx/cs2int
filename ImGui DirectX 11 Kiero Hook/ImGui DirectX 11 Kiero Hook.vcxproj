@@ -172,6 +172,7 @@
     <ClCompile Include="src\globals.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\cheat\visuals\visuals.cpp" />
+    <ClCompile Include="src\cheat\sdk\util.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ext\kiero\minhook\dll_resources\MinHook.def" />
@@ -211,6 +212,7 @@
     <ClInclude Include="ext\kiero\minhook\src\trampoline.h" />
     <ClInclude Include="src\offsets.h" />
     <ClInclude Include="src\cheat\visuals\visuals.h" />
+    <ClInclude Include="src\cheat\sdk\util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

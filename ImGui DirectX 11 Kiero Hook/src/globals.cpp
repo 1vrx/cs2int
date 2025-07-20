@@ -7,6 +7,8 @@ namespace globals
 	{
 		return ((uintptr_t)addr - globals::modBase);
 	}
+
+	bool ingame = false;
 }
 
 namespace toggle
@@ -31,6 +33,8 @@ namespace toggle
 	bool hooks = false;
 
 	bool skinchanger = false;
+
+	bool ingame = true;
 	
 	
 }

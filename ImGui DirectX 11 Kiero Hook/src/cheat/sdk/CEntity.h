@@ -108,3 +108,10 @@ public:
 	}
 	
 };
+
+/*
+namespace util
+{
+	bool ingame();
+}
+*/
