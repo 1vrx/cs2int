@@ -149,7 +149,7 @@ namespace hook
 		///*
 		std::cout << "\nCalled INIT";
 
-		MH_Initialize();
+		//MH_Initialize();
 
 			auto o_cm = patternScan("client.dll", "85 D2 0F 85 ? ? ? ? 48 8B C4 44 88 40");
 			std::cout << "\nCreateMove Located @ 0x" << o_cm;
@@ -164,10 +164,10 @@ namespace hook
 			}
 
 
-			MH_CreateHook((LPVOID)fsnpat, (LPVOID)hkFrameStageNotify, (LPVOID*)&oFrameStageNotify);
-			MH_CreateHook((LPVOID)o_cm, (LPVOID)hkCreateMove, (LPVOID*)&oCreateMove);
-			MH_EnableHook((LPVOID)o_cm);
-			MH_EnableHook((LPVOID)fsnpat);
+			//MH_CreateHook((LPVOID)fsnpat, (LPVOID)hkFrameStageNotify, (LPVOID*)&oFrameStageNotify);
+			//MH_CreateHook((LPVOID)o_cm, (LPVOID)hkCreateMove, (LPVOID*)&oCreateMove);
+			//MH_EnableHook((LPVOID)o_cm);
+			//MH_EnableHook((LPVOID)fsnpat);
 
 			
 			std::cout << "\nEnabledHook";
